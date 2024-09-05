@@ -1,0 +1,10 @@
+  609  iverilog -D PERIOD=20 counter.v tb.v -o tb.exe
+  612  iverilog counter.v tb.v -o tb.exe
+  613  iverilog -D PERIOD=200 counter.v tb.v -o tb.exe
+  727  history | grep iverilog
+  728  history | grep iverilog | tail -n 5 > history.txt
+  603  gtkwave counter.vcd
+  607  gtkwave counter.vcd
+  611  gtkwave counter.vcd
+  714  gtkwave counter.vcd
+  730  history | grep gtk | tail -n 5 | tee -a history.txt
