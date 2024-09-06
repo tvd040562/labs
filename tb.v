@@ -4,7 +4,7 @@ module tb (
 	//input clk,
 	//input reset,
 );
-	reg clk, reset, preload;
+	reg clk, reset, preload, enable;
 	reg [3:0] pl_data;
 	wire [7:0] cout;
 	wire clk_delay;
@@ -31,9 +31,19 @@ module tb (
 	end
 	endtask
 
+	task stopforclk (input integer n);
+	begin
+		enable = 0;
+		repeat (n)
+			@(posedge clk_delay);
+		enable = 1;
+	end
+	endtask
+
 	counter dut (
 		.clk(clk),
 		.reset(reset),
+		.enable(enable),
 		.preload(preload),
 		.pl_data(pl_data),
 		.cout(cout)
@@ -46,6 +56,7 @@ module tb (
 		$dumpvars();
 		preload = 0;
 		pl_data = 0;
+		enable = 1;
 		reset = 1;
 		waitforclk(3);
 		reset = 0;
@@ -53,6 +64,8 @@ module tb (
 		preload_(5);
 		waitforclk(10);
 		preload_(2);
+		waitforclk(10);
+		stopforclk(10);
 		waitforclk(266);
 		$finish();
 	end
