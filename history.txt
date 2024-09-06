@@ -8,3 +8,144 @@
   611  gtkwave counter.vcd
   714  gtkwave counter.vcd
   730  history | grep gtk | tail -n 5 | tee -a history.txt
+   10  openlane --dockerized --smoke-test
+   15  openlane --dockerized --run-example spm
+   21  openlane --dockerized --run-example gcd
+   22  find /usr/local/lib/python3.10/dist-packages/openlane -name "*example*"
+   23  ls /usr/local/lib/python3.10/dist-packages/openlane/examples
+   89  openlane --dockerized config.json
+   90  openlane --dockerized config.json --last-run --flow openinopenroad
+  190  openlane --dockerized config.json
+  193  openlane --dockerized config.json
+  195  openlane --dockerized config.json
+  197  openlane --dockerized config.json
+  199  openlane --dockerized config.json
+  201  openlane --dockerized config.json
+  203  openlane --dockerized config.json
+  206  openlane --dockerized config.json
+  207  openlane --dockerized config.json --last-run --flow openinopenroad
+  209  openlane --dockerized config.json
+  211  openlane --dockerized config.json
+  213  openlane --dockerized config.json
+  217  openlane --dockerized config.json --last-run --flow openinopenroad
+  219  openlane --dockerized config.json
+  221  openlane --dockerized config.json
+  249  openlane --dockerized config.json
+  251  openlane --dockerized config.json
+  253  openlane --dockerized config.json
+  255  openlane --dockerized config.json
+  257  openlane --dockerized config.json
+  260  openlane --dockerized config.json
+  262  openlane --dockerized config.json
+  264  openlane --dockerized config.json
+  266  openlane --dockerized config.json
+  268  openlane --dockerized config.json
+  270  openlane --dockerized config.json
+  277  openlane --dockerized config.json
+  283  openlane --dockerized config.json
+  286  openlane --dockerized config.json
+  288  openlane --dockerized config.json
+  290  openlane --dockerized config.json
+  293  openlane --dockerized config.json
+  296  openlane --dockerized config.json
+  300  openlane --dockerized config.json
+  302  openlane --dockerized config.json
+  306  openlane --dockerized config.json
+  309  openlane --dockerized config.json
+  311  openlane --dockerized config.json
+  314  openlane --dockerized config.json
+  315  openlane --dockerized config.json --last-run --flow openinopenroad
+  317  openlane --dockerized config.json
+  319  openlane --dockerized config.json
+  323  openlane --dockerized config.json --to OpenROAD.STAPostPNR
+  326  openlane --dockerized config.json --last-run --flow openinopenroad
+  328  openlane --dockerized config.json --to OpenROAD.STAPostPNR
+  330  openlane --dockerized config.json --to OpenROAD.STAPostPNR
+  331  openlane --dockerized config.json --last-run --flow openinopenroad
+  333  openlane --dockerized config.json --to OpenROAD.STAPostPNR
+  334  openlane --dockerized config.json --last-run --flow openinopenroad
+  336  openlane --dockerized config.json
+  338  openlane --dockerized config.json
+  340  openlane --dockerized config.json
+  342  openlane --dockerized config.json
+  344  openlane --dockerized config.json
+  347  openlane --dockerized config.json
+  349  openlane --dockerized config.json
+  354  openlane --dockerized config.json
+  355  openlane --dockerized config.json --last-run --flow openinopenroad
+  359  openlane --dockerized config.json
+  360  openlane --dockerized config.json --last-run --flow openinopenroad
+  431  openlane --dockerized config.json 
+  433  openlane --dockerized config.json 
+  442  openlane --dockerized config.json 
+  446  openlane --dockerized config.json 
+  492  openlane config.json
+  493  openlane --dockerized config.json
+  497  openlane --dockerized config.json
+  616  openlane --dockerized config.json --last-run --flow openinopenroad
+  618  openlane --dockerized config.json
+  620  openlane --dockerized config.json
+  622  openlane --dockerized config.json
+  623  openlane --dockerized config.json --last-run --flow openinopenroad
+  625  openlane --dockerized config.json
+  626  openlane --dockerized config.json --last-run --flow openinopenroad
+  628  openlane --dockerized config.json
+  630  openlane --dockerized config.json
+  632  openlane --dockerized config.json
+  634  openlane --dockerized config.json
+  635  openlane --dockerized config.json --last-run --flow openinopenroad
+  637  openlane --dockerized config.json --to synthesis
+  638  openlane --dockerized config.json --to Yosys.Synthesis
+  639  openlane --dockerized config.json --to prepnr
+  640  openlane --dockerized config.json --to OpenROAD.STAPrePNR
+  641  openlane --dockerized config.json --last-run --flow openinopenroad
+  642  openlane --dockerized config.json --to floor
+  643  openlane --dockerized config.json --to OpenROAD.Floorplan
+  644  openlane --dockerized config.json --to routing
+  645  openlane --dockerized config.json --to midpnr
+  646  openlane --dockerized config.json --to OpenROAD.STAMidPNR-3
+  647  openlane --dockerized config.json --last-run --flow openinopenroad
+  649  openlane --dockerized config.json --to OpenROAD.STApostpnr
+  654  openlane --dockerized config.json --to OpenROAD.STApostpnr
+  656  openlane --dockerized config.json --to OpenROAD.STApostpnr
+  658  openlane --dockerized config.json --to OpenROAD.STApostpnr
+  660  openlane --dockerized config.json --to OpenROAD.STApostpnr
+  663  openlane --dockerized config.json --to OpenROAD.STApostpnr
+  665  openlane --dockerized config.json --last-run --flow openinopenroad
+  667  openlane --dockerized config.json --to OpenROAD.STApostpnr
+  668  openlane --dockerized config.json --last-run --flow openinopenroad
+  670  openlane --dockerized config.json --to OpenROAD.STApostpnr
+  672  openlane --dockerized config.json --to OpenROAD.STApostpnr
+  674  openlane --dockerized config.json --to OpenROAD.STApostpnr
+  676  openlane --dockerized config.json --to OpenROAD.STApostpnr
+  678  openlane --dockerized config.json --to OpenROAD.STApostpnr
+  681  openlane --dockerized config.json --to OpenROAD.STApostpnr
+  688  openlane --dockerized config.json --to OpenROAD.STApostpnr
+  691  openlane --dockerized config.json --to OpenROAD.STApostpnr
+  694  openlane --dockerized config.json --to OpenROAD.STApostpnr
+  696  openlane --dockerized config.json --to OpenROAD.STApostpnr
+  698  openlane --dockerized config.json --to OpenROAD.STApostpnr
+  699  openlane --dockerized config.json --last-run --flow openinopenroad
+  702  openlane --dockerized config.json
+  806  openlane --dockerized config.json
+  808  openlane --dockerized config.json
+  812  openlane --dockerized config.json
+  813  openlane --dockerized config.json --last-run --flow openinopenroad
+  815  openlane --dockerized config.json
+  818  openlane --dockerized config.json --to postpnr
+  819  openlane --dockerized config.json --to OpenROAD.STAPostPNR
+  821  openlane --dockerized config.json --to OpenROAD.STAPostPNR
+  822  openlane --dockerized config.json --last-run --from OpenROAD.STAPostPNR
+  830  openlane --dockerized initial.json 
+  837  openlane --dockerized initial.json 
+  840* openlane --dockerized initial.json --
+  845  openlane --dockerized initial.json --last-run --flow openinopenroad
+  849  openlane --dockerized initial.json --to openroad.stapostpnr
+  851  openlane --dockerized initial.json --to openroad.stapostpnr
+  852  openlane --dockerized initial.json --last-run --from openroad.stapostpnr
+  882  openlane --dockerized initial.json --last-run --from openroad.stapostpnr
+  883  openlane --dockerized initial.json
+  897  openlane --dockerized initial.json
+  898  openlane --dockerized initial.json --last-run --flow openinopenroad
+  899  openlane --dockerized initial.json --to OpenROAD.GlobalPlacementSkipIO
+  900  history | grep openlane | tee -a history.txt 
