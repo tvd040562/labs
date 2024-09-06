@@ -9,7 +9,15 @@ module tb (
 	reg [3:0] incr;
 	wire [7:0] cout;
 	wire clk_delay;
+	/*
+	reg [31:0] table_ [0:255];
 
+	initial
+		for (integer i=0; i<256; i=i+1) begin
+		        table_[i] = $sin(i*$acos(-1)/128.0) * (2**31-1);
+			$display("assign table_[%3d] = 32'H%h;", i, table_[i]);
+		end
+	*/
 	assign #(`CLK_DELAY) clk_delay = clk;
 
 	initial begin
@@ -49,10 +57,11 @@ module tb (
 		.preload(preload),
 		.pl_data(pl_data),
 		.incr(incr),
+		//.table_(table_),
 		.cout(cout)
 	);
 
-	initial $display("Hello world\n");
+	//initial $display("Hello world\n");
 
 	initial begin
 		$dumpfile("counter.vcd");
@@ -71,10 +80,20 @@ module tb (
 		preload_(2);
 		waitforclk(10);
 		stopforclk(10);
+		incr = 1;
+		waitforclk(100);
+		//updn = 0;
+		waitforclk(1000);
+		incr = 2;
+		waitforclk(1000);
+		incr = 3;
+		waitforclk(1000);
 		incr = 4;
-		waitforclk(100);
-		updn = 0;
-		waitforclk(100);
+		waitforclk(1000);
+		incr = 5;
+		waitforclk(1000);
+		incr = 6;
+		waitforclk(1000);
 		$finish();
 	end
 endmodule
