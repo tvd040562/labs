@@ -1,11 +1,15 @@
-`timescale 1ns/1ps
+`timescale 1ns/10ps
 //`define PERIOD 10
 module tb (
 	//input clk,
 	//input reset,
 );
-	reg clk, reset;
+	reg clk, reset, preload;
+	reg [3:0] pl_data;
 	wire [7:0] cout;
+	wire clk_delay;
+
+	assign #(`CLK_DELAY) clk_delay = clk;
 
 	initial begin
 		clk = 0;
@@ -15,12 +19,23 @@ module tb (
 
 	task waitforclk (input integer n);
 		repeat (n)
-			@(posedge clk);
+			@(posedge clk_delay);
+	endtask
+
+	task preload_ (input [3:0] n);
+	begin
+		preload = 1;
+		pl_data = n;
+		@(posedge clk_delay);
+		preload = 0;
+	end
 	endtask
 
 	counter dut (
 		.clk(clk),
 		.reset(reset),
+		.preload(preload),
+		.pl_data(pl_data),
 		.cout(cout)
 	);
 
@@ -29,9 +44,15 @@ module tb (
 	initial begin
 		$dumpfile("counter.vcd");
 		$dumpvars();
+		preload = 0;
+		pl_data = 0;
 		reset = 1;
 		waitforclk(3);
 		reset = 0;
+		waitforclk(26);
+		preload_(5);
+		waitforclk(10);
+		preload_(2);
 		waitforclk(266);
 		$finish();
 	end
