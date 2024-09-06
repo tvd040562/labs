@@ -3,6 +3,7 @@ module counter (
 	input reset,
 	input enable,
 	input preload,
+	input updn,
 	input [3:0] pl_data,
 	output reg [7:0] cout
 );
@@ -12,6 +13,9 @@ module counter (
 		else if (preload)
 			cout = pl_data;
 		else if (enable)
-			cout = cout + 1;
+			if (updn)
+				cout = cout + 1;
+			else
+				cout = cout - 1;
 	end
 endmodule

@@ -1,10 +1,10 @@
-`timescale 1ns/10ps
+`timescale 1ns/1ps
 //`define PERIOD 10
 module tb (
 	//input clk,
 	//input reset,
 );
-	reg clk, reset, preload, enable;
+	reg clk, reset, preload, enable, updn;
 	reg [3:0] pl_data;
 	wire [7:0] cout;
 	wire clk_delay;
@@ -44,6 +44,7 @@ module tb (
 		.clk(clk),
 		.reset(reset),
 		.enable(enable),
+		.updn(updn),
 		.preload(preload),
 		.pl_data(pl_data),
 		.cout(cout)
@@ -57,6 +58,7 @@ module tb (
 		preload = 0;
 		pl_data = 0;
 		enable = 1;
+		updn = 1;
 		reset = 1;
 		waitforclk(3);
 		reset = 0;
@@ -66,7 +68,9 @@ module tb (
 		preload_(2);
 		waitforclk(10);
 		stopforclk(10);
-		waitforclk(266);
+		waitforclk(100);
+		updn = 0;
+		waitforclk(100);
 		$finish();
 	end
 endmodule
