@@ -1,0 +1,6 @@
+{
+	"DESIGN_NAME": "counter",
+	"VERILOG_FILES": "dir::counter.v",
+	"CLOCK_PORT": "clk",
+	"CLOCK_PERIOD": 3.0
+}
