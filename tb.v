@@ -6,6 +6,7 @@ module tb (
 );
 	reg clk, reset, preload, enable, updn;
 	reg [3:0] pl_data;
+	reg [3:0] incr;
 	wire [7:0] cout;
 	wire clk_delay;
 
@@ -47,6 +48,7 @@ module tb (
 		.updn(updn),
 		.preload(preload),
 		.pl_data(pl_data),
+		.incr(incr),
 		.cout(cout)
 	);
 
@@ -55,6 +57,7 @@ module tb (
 	initial begin
 		$dumpfile("counter.vcd");
 		$dumpvars();
+		incr = 1;
 		preload = 0;
 		pl_data = 0;
 		enable = 1;
@@ -68,6 +71,7 @@ module tb (
 		preload_(2);
 		waitforclk(10);
 		stopforclk(10);
+		incr = 4;
 		waitforclk(100);
 		updn = 0;
 		waitforclk(100);

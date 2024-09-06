@@ -5,6 +5,7 @@ module counter (
 	input preload,
 	input updn,
 	input [3:0] pl_data,
+	input [3:0] incr,
 	output reg [7:0] cout
 );
 	always @(posedge clk or posedge reset) begin
@@ -14,8 +15,8 @@ module counter (
 			cout = pl_data;
 		else if (enable)
 			if (updn)
-				cout = cout + 1;
+				cout = cout + incr;
 			else
-				cout = cout - 1;
+				cout = cout - incr;
 	end
 endmodule
