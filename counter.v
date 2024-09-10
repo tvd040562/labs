@@ -24,8 +24,8 @@ module counter (
 	`include "table.vh"
 	assign sine_out = table_[cout];
 `else
-	reg [31:0] temp_sine_out0;
-	reg [31:0] temp_sine_out1;
+	wire [31:0] temp_sine_out0;
+	wire [31:0] temp_sine_out1;
 	reg [31:0] reg_sine_out;
 	assign sine_out = reg_sine_out;
 	reg enable_reg, preload_reg, updn_reg;
