@@ -1,6 +1,5 @@
 tb.exe: *.v
-	iverilog -D PERIOD=20 -D CLK_DELAY=0.01 -D USE_RAM=1 -g2005-sv counter.v tb.v \
-	sram_macros/verilog/sky130_sram_1kbyte_1rw1r_32x256_8.v +timescale+1ns/1ps -o tb.exe
+	iverilog -D PERIOD=20 -D CLK_DELAY=0.01 -D USE_RAM=1 -g2005-sv -f verilog.f -o tb.exe
 
 counter.vcd: tb.exe
 	./tb.exe
@@ -29,6 +28,9 @@ global_pl:
 
 viewlayout:
 	openlane --dockerized initial.json --last-run --flow openinopenroad
+
+gds:
+	openlane --dockerized initial.json
 
 clean:
 	rm -rf tb.exe counter.vcd

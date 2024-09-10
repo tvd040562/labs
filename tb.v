@@ -5,9 +5,9 @@ module tb (
 	//input reset,
 );
 	reg clk, reset, preload, enable, updn;
-	reg [3:0] pl_data;
+	reg [8:0] pl_data;
 	reg [3:0] incr;
-	wire [7:0] cout;
+	wire [8:0] cout;
 	wire clk_delay;
 	/*
 	reg [31:0] table_ [0:255];
@@ -21,8 +21,12 @@ module tb (
 
 `ifdef USE_RAM
 	initial
-		for (integer i=0; i<256; i=i+1)
-			dut.u_mem.mem[i] = $sin(i*$acos(-1)/128.0) * (2**31-1);
+		for (integer i=0; i<512; i=i+1)
+			if (i < 256)
+				dut.u_mem0.mem[i] = $sin(i*$acos(-1)/256.0) * (2**31-1);
+			else
+				dut.u_mem1.mem[i-256] = $sin(i*$acos(-1)/256.0) * (2**31-1);
+
 	reg csb0, web0;
 	reg [3:0] wmask0;
 	reg [7:0] addr0;

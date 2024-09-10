@@ -2,22 +2,30 @@
 	"DESIGN_NAME": "counter",
 	"VERILOG_FILES": ["dir::sram_null.v", "dir::counter.v"],
 	"CLOCK_PORT": "clk",
-	"CLOCK_PERIOD": 5.0,
+	"CLOCK_PERIOD": 7.0,
 	"FALLBACK_SDC_FILE": "dir::counter.sdc",
-	"//FP_SIZING": "absolute",
-	"//DIE_AREA": "0 0 700 600",
+	"FP_SIZING": "absolute",
+	"DIE_AREA": "0 0 1125 550",
 	"MAX_FANOUT_CONSTRAINT": 5,
 	"MAX_TRANSITION_CONSTRAINT": 0.5,
-	"RUN_POST_GPL_DESIGN_REPAIR": true,
-	"GRT_RESIZER_SETUP_MAX_BUFFER_PCT": 50,
-	"RUN_POST_GRT_RESIZER_TIMING": true,
+	"//RUN_POST_GPL_DESIGN_REPAIR": true,
+	"//GRT_RESIZER_SETUP_MAX_BUFFER_PCT": 50,
+	"RT_MAX_LAYER": "met4",
+	"//RUN_POST_GRT_RESIZER_TIMING": true,
 	"MACROS": {
   		"sky130_sram_1kbyte_1rw1r_32x256_8": {
       			"instances": {
-          			"u_mem": {
+          			"u_mem0": {
               				"location": [
-                  				100,
-                  				100
+                  				50,
+                  				75
+              				],
+              				"orientation": "N"
+          			},
+          			"u_mem1": {
+              				"location": [
+                  				600,
+                  				75
               				],
               				"orientation": "N"
           			}
@@ -30,8 +38,13 @@
       			]
   		}
 	},
-	"FP_PDN_MACRO_HOOKS": "u_mem vccd1 vssd1 vccd1 vssd1",
-	"SYNTH_POWER_DEFINE": "USE_POWER_PINS",
+	"VDD_NETS": "vccd1",
+	"GND_NETS": "vssd1",
+	"//FP_PDN_MACRO_HOOKS": ["u_mem0 vccd1 vssd1 vccd1 vssd1",
+			       "u_mem1 vccd1 vssd1 vccd1 vssd1"],
+	"PDN_MACRO_CONNECTIONS": ["u_mem0 vccd1 vssd1 vccd1 vssd1",
+				  "u_mem1 vccd1 vssd1 vccd1 vssd1"],
+	"//SYNTH_POWER_DEFINE": "USE_POWER_PINS",
 	"FP_PDN_CHECK_NODES": false,
 	"MAGIC_CAPTURE_ERRORS": false,
 	"RUN_KLAYOUT_DRC": false,
