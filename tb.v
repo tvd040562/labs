@@ -21,8 +21,14 @@ module tb (
 
 `ifdef USE_RAM
 	initial
-		for (integer i=0; i<256; i=i+1)
-			dut.u_mem.mem[i] = $sin(i*$acos(-1)/128.0) * (2**31-1);
+		for (reg [7:0] i=0; i<256; i=i+1)
+			case (i[7:6])
+				2'b00: dut.u_mem0.mem[i[5:0]] = $sin(i*$acos(-1)/128.0) * (2**31-1);
+				2'b01: dut.u_mem1.mem[i[5:0]] = $sin(i*$acos(-1)/128.0) * (2**31-1);
+				2'b10: dut.u_mem2.mem[i[5:0]] = $sin(i*$acos(-1)/128.0) * (2**31-1);
+				default: dut.u_mem3.mem[i[5:0]] = $sin(i*$acos(-1)/128.0) * (2**31-1);
+			endcase
+
 	reg csb0, web0;
 	reg [3:0] wmask0;
 	reg [7:0] addr0;
