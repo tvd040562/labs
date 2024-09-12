@@ -22,17 +22,19 @@ module tb (
 
 `ifdef USE_RAM
 	initial
-		for (integer i=0; i<256; i=i+1) begin
+		for (reg [8:0] i=0; i<256; i=i+1) begin
 			value = $sin(i*$acos(-1)/128.0) * ((2**31)-1);
 			//$display("i: %3d; value: %32h", i, value);
-			if (i<64)
-				dut.u_mem0.mem[i] = value;
-			else if (i>=64 && i<128)
-				dut.u_mem1.mem[i-64] = value;
-			else if (i>=128 && i<192)
-				dut.u_mem2.mem[i-128] = value;
-			else
-				dut.u_mem3.mem[i-192] = value;
+			case (i[7:5])
+				3'b000: dut.u_mem0.mem[i] = value;
+				3'b001: dut.u_mem1.mem[i-32] = value;
+				3'b010: dut.u_mem2.mem[i-64] = value;
+				3'b011: dut.u_mem3.mem[i-96] = value;
+				3'b100: dut.u_mem4.mem[i-128] = value;
+				3'b101: dut.u_mem5.mem[i-160] = value;
+				3'b110: dut.u_mem6.mem[i-192] = value;
+				default: dut.u_mem7.mem[i-224] = value;
+			endcase
 		end
 
 	reg csb0, web0;

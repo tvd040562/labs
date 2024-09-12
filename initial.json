@@ -2,17 +2,17 @@
 	"DESIGN_NAME": "counter",
 	"VERILOG_FILES": ["dir::sram_null.v", "dir::counter.v"],
 	"CLOCK_PORT": "clk",
-	"CLOCK_PERIOD": 7.1,
+	"CLOCK_PERIOD": 10.0,
 	"FALLBACK_SDC_FILE": "dir::counter.sdc",
 	"FP_SIZING": "absolute",
-	"DIE_AREA": "0 0 1000 800",
+	"DIE_AREA": "0 0 1825 575",
 	"MAX_FANOUT_CONSTRAINT": 6,
 	"MAX_TRANSITION_CONSTRAINT": 0.5,
 	"//RUN_POST_GPL_DESIGN_REPAIR": true,
 	"//GRT_RESIZER_SETUP_MAX_BUFFER_PCT": 50,
 	"//RUN_POST_GRT_RESIZER_TIMING": true,
 	"MACROS": {
-  		"sky130_sram_256byte_1rw1r_32x64_8": {
+  		"sky130_sram_128byte_1rw1r_32x32_8": {
       			"instances": {
           			"u_mem0": {
               				"location": [
@@ -23,31 +23,59 @@
           			},
           			"u_mem1": {
               				"location": [
-                  				550,
+                  				500,
                   				75
               				],
               				"orientation": "N"
           			},
           			"u_mem2": {
               				"location": [
-                  				75,
-                  				450
+                  				1000,
+                  				75
               				],
               				"orientation": "N"
           			},
           			"u_mem3": {
               				"location": [
-                  				550,
-                  				450
+                  				1425,
+                  				75
+              				],
+              				"orientation": "N"
+          			},
+          			"u_mem4": {
+              				"location": [
+                  				75,
+                  				325
+              				],
+              				"orientation": "N"
+          			},
+          			"u_mem5": {
+              				"location": [
+                  				500,
+                  				325
+              				],
+              				"orientation": "N"
+          			},
+          			"u_mem6": {
+              				"location": [
+                  				1000,
+                  				325
+              				],
+              				"orientation": "N"
+          			},
+          			"u_mem7": {
+              				"location": [
+                  				1425,
+                  				325
               				],
               				"orientation": "N"
           			}
       			},
       			"gds": [
-          			"dir::./RAM/sky130_sram_256byte_1rw1r_32x64_8.gds"
+          			"dir::./RAM128/sky130_sram_128byte_1rw1r_32x32_8.gds"
       			],
       			"lef": [
-          			"dir::./RAM/sky130_sram_256byte_1rw1r_32x64_8.lef"
+          			"dir::./RAM128/sky130_sram_128byte_1rw1r_32x32_8.lef"
       			]
   		}
 	},
@@ -56,7 +84,11 @@
 	"PDN_MACRO_CONNECTIONS": ["u_mem0 vccd1 vssd1 vccd1 vssd1",
 		               "u_mem1 vccd1 vssd1 vccd1 vssd1",
 		               "u_mem2 vccd1 vssd1 vccd1 vssd1",
-		               "u_mem3 vccd1 vssd1 vccd1 vssd1"],
+		               "u_mem3 vccd1 vssd1 vccd1 vssd1",
+		               "u_mem4 vccd1 vssd1 vccd1 vssd1",
+		               "u_mem5 vccd1 vssd1 vccd1 vssd1",
+		               "u_mem6 vccd1 vssd1 vccd1 vssd1",
+		               "u_mem7 vccd1 vssd1 vccd1 vssd1"],
 	"MAGIC_CAPTURE_ERRORS": false,
 	"RUN_KLAYOUT_DRC": false,
 	"//MAGIC_DRC_USE_GDS": false,
