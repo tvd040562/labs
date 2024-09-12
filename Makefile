@@ -22,9 +22,11 @@ midpnrsta:
 postpnrsta:
 	openlane --dockerized initial.json --to OpenROAD.STApostpnr
 
-
 global_pl:
 	openlane --dockerized initial.json --to OpenROAD.GlobalPlacementSkipIO
+
+gds:
+	openlane --dockerized initial.json
 
 viewlayout:
 	openlane --dockerized initial.json --last-run --flow openinopenroad

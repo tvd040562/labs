@@ -2,15 +2,15 @@
 	"DESIGN_NAME": "counter",
 	"VERILOG_FILES": ["dir::sram_null.v", "dir::counter.v"],
 	"CLOCK_PORT": "clk",
-	"CLOCK_PERIOD": 5.0,
-	"FALLBACK_SDC_FILE": "dir::counter.sdc",
-	"//FP_SIZING": "absolute",
-	"//DIE_AREA": "0 0 700 600",
+	"CLOCK_PERIOD": 10.0,
+	"//FALLBACK_SDC_FILE": "dir::counter.sdc",
+	"FP_SIZING": "absolute",
+	"DIE_AREA": "0 0 1200 1000",
 	"MAX_FANOUT_CONSTRAINT": 5,
 	"MAX_TRANSITION_CONSTRAINT": 0.5,
-	"RUN_POST_GPL_DESIGN_REPAIR": true,
-	"GRT_RESIZER_SETUP_MAX_BUFFER_PCT": 50,
-	"RUN_POST_GRT_RESIZER_TIMING": true,
+	"//RUN_POST_GPL_DESIGN_REPAIR": true,
+	"//GRT_RESIZER_SETUP_MAX_BUFFER_PCT": 50,
+	"//RUN_POST_GRT_RESIZER_TIMING": true,
 	"MACROS": {
   		"sky130_sram_256byte_1rw1r_32x64_8": {
       			"instances": {
@@ -20,31 +20,25 @@
                   				100
               				],
               				"orientation": "N"
-          			}
-      			},
-      			"instances": {
+          			},
           			"u_mem1": {
               				"location": [
-                  				200,
+                  				600,
                   				100
               				],
               				"orientation": "N"
-          			}
-      			},
-      			"instances": {
+          			},
           			"u_mem2": {
               				"location": [
-                  				200,
-                  				100
+                  				100,
+                  				500
               				],
               				"orientation": "N"
-          			}
-      			},
-      			"instances": {
+          			},
           			"u_mem3": {
               				"location": [
-                  				200,
-                  				200
+                  				600,
+                  				500
               				],
               				"orientation": "N"
           			}
@@ -57,16 +51,16 @@
       			]
   		}
 	},
-	"FP_PDN_MACRO_HOOKS": ["u_mem0 vccd1 vssd1 vccd1 vssd1",
+	"VDD_NETS": "vccd1",
+	"GND_NETS": "vssd1",
+	"PDN_MACRO_CONNECTIONS": ["u_mem0 vccd1 vssd1 vccd1 vssd1",
 		               "u_mem1 vccd1 vssd1 vccd1 vssd1",
 		               "u_mem2 vccd1 vssd1 vccd1 vssd1",
 		               "u_mem3 vccd1 vssd1 vccd1 vssd1"],
-	"SYNTH_POWER_DEFINE": "USE_POWER_PINS",
-	"FP_PDN_CHECK_NODES": false,
 	"MAGIC_CAPTURE_ERRORS": false,
 	"RUN_KLAYOUT_DRC": false,
 	"//MAGIC_DRC_USE_GDS": false,
 	"RUN_KLAYOUT_XOR": false,
 	"RUN_MAGIC_DRC": false,
-	"//PL_TARGET_DENSITY_PCT": 50
+	"PL_TARGET_DENSITY_PCT": 50
 }
