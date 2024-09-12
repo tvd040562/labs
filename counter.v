@@ -8,12 +8,15 @@ module counter (
 	input [3:0] incr,
 	//input [31:0] table_ [0:255],
 	output reg [7:0] cout,
-	output [31:0] sine_out
+	output reg [31:0] sine_out
 );
 
 	wire [31:0] table_ [0:255];
 	`include "table.vh"
-	assign sine_out = table_[cout];
+
+	always @(posedge clk) begin
+		sine_out = table_[cout];
+	end
 
 	always @(posedge clk or posedge reset) begin
 		if (reset)
