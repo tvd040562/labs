@@ -11,7 +11,7 @@ module counter (
 	output [31:0] sine_out
 );
 
-	reg [31:0] table_ [0:255];
+	wire [31:0] table_ [0:255];
 	`include "table.vh"
 	assign sine_out = table_[cout];
 
