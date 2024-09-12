@@ -19,6 +19,9 @@ prepnrsta:
 midpnrsta:
 	openlane --dockerized initial.json --to OpenROAD.STAMidPNR-3
 
+checksta:
+	openlane --dockerized initial.json --last-run --from OpenROAD.STApostpnr --to OpenROAD.STApostpnr
+
 postpnrsta:
 	openlane --dockerized initial.json --to OpenROAD.STApostpnr
 

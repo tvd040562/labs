@@ -2,11 +2,11 @@
 	"DESIGN_NAME": "counter",
 	"VERILOG_FILES": ["dir::sram_null.v", "dir::counter.v"],
 	"CLOCK_PORT": "clk",
-	"CLOCK_PERIOD": 10.0,
-	"//FALLBACK_SDC_FILE": "dir::counter.sdc",
+	"CLOCK_PERIOD": 7.1,
+	"FALLBACK_SDC_FILE": "dir::counter.sdc",
 	"FP_SIZING": "absolute",
-	"DIE_AREA": "0 0 1200 1000",
-	"MAX_FANOUT_CONSTRAINT": 5,
+	"DIE_AREA": "0 0 1000 800",
+	"MAX_FANOUT_CONSTRAINT": 6,
 	"MAX_TRANSITION_CONSTRAINT": 0.5,
 	"//RUN_POST_GPL_DESIGN_REPAIR": true,
 	"//GRT_RESIZER_SETUP_MAX_BUFFER_PCT": 50,
@@ -16,29 +16,29 @@
       			"instances": {
           			"u_mem0": {
               				"location": [
-                  				100,
-                  				100
+                  				75,
+                  				75
               				],
               				"orientation": "N"
           			},
           			"u_mem1": {
               				"location": [
-                  				600,
-                  				100
+                  				550,
+                  				75
               				],
               				"orientation": "N"
           			},
           			"u_mem2": {
               				"location": [
-                  				100,
-                  				500
+                  				75,
+                  				450
               				],
               				"orientation": "N"
           			},
           			"u_mem3": {
               				"location": [
-                  				600,
-                  				500
+                  				550,
+                  				450
               				],
               				"orientation": "N"
           			}
