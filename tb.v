@@ -5,10 +5,11 @@ module tb (
 	//input reset,
 );
 	reg clk, reset, preload, enable, updn;
-	reg [3:0] pl_data;
+	reg [7:0] pl_data;
 	reg [3:0] incr;
 	wire [7:0] cout;
 	wire clk_delay;
+	reg [31:0] value;
 	/*
 	reg [31:0] table_ [0:255];
 
@@ -21,13 +22,18 @@ module tb (
 
 `ifdef USE_RAM
 	initial
-		for (reg [7:0] i=0; i<256; i=i+1)
-			case (i[7:6])
-				2'b00: dut.u_mem0.mem[i[5:0]] = $sin(i*$acos(-1)/128.0) * (2**31-1);
-				2'b01: dut.u_mem1.mem[i[5:0]] = $sin(i*$acos(-1)/128.0) * (2**31-1);
-				2'b10: dut.u_mem2.mem[i[5:0]] = $sin(i*$acos(-1)/128.0) * (2**31-1);
-				default: dut.u_mem3.mem[i[5:0]] = $sin(i*$acos(-1)/128.0) * (2**31-1);
-			endcase
+		for (integer i=0; i<256; i=i+1) begin
+			value = $sin(i*$acos(-1)/128.0) * ((2**31)-1);
+			//$display("i: %3d; value: %32h", i, value);
+			if (i<64)
+				dut.u_mem0.mem[i] = value;
+			else if (i>=64 && i<128)
+				dut.u_mem1.mem[i-64] = value;
+			else if (i>=128 && i<192)
+				dut.u_mem2.mem[i-128] = value;
+			else
+				dut.u_mem3.mem[i-192] = value;
+		end
 
 	reg csb0, web0;
 	reg [3:0] wmask0;

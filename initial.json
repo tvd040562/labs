@@ -12,9 +12,9 @@
 	"GRT_RESIZER_SETUP_MAX_BUFFER_PCT": 50,
 	"RUN_POST_GRT_RESIZER_TIMING": true,
 	"MACROS": {
-  		"sky130_sram_1kbyte_1rw1r_32x256_8": {
+  		"sky130_sram_256byte_1rw1r_32x64_8": {
       			"instances": {
-          			"u_mem": {
+          			"u_mem0": {
               				"location": [
                   				100,
                   				100
@@ -22,15 +22,45 @@
               				"orientation": "N"
           			}
       			},
+      			"instances": {
+          			"u_mem1": {
+              				"location": [
+                  				200,
+                  				100
+              				],
+              				"orientation": "N"
+          			}
+      			},
+      			"instances": {
+          			"u_mem2": {
+              				"location": [
+                  				200,
+                  				100
+              				],
+              				"orientation": "N"
+          			}
+      			},
+      			"instances": {
+          			"u_mem3": {
+              				"location": [
+                  				200,
+                  				200
+              				],
+              				"orientation": "N"
+          			}
+      			},
       			"gds": [
-          			"dir::./sram_macros/gds/sky130_sram_1kbyte_1rw1r_32x256_8.gds"
+          			"dir::./RAM/sky130_sram_256byte_1rw1r_32x64_8.gds"
       			],
       			"lef": [
-          			"dir::./sram_macros/lef/sky130_sram_1kbyte_1rw1r_32x256_8.lef"
+          			"dir::./RAM/sky130_sram_256byte_1rw1r_32x64_8.lef"
       			]
   		}
 	},
-	"FP_PDN_MACRO_HOOKS": "u_mem vccd1 vssd1 vccd1 vssd1",
+	"FP_PDN_MACRO_HOOKS": ["u_mem0 vccd1 vssd1 vccd1 vssd1",
+		               "u_mem1 vccd1 vssd1 vccd1 vssd1",
+		               "u_mem2 vccd1 vssd1 vccd1 vssd1",
+		               "u_mem3 vccd1 vssd1 vccd1 vssd1"],
 	"SYNTH_POWER_DEFINE": "USE_POWER_PINS",
 	"FP_PDN_CHECK_NODES": false,
 	"MAGIC_CAPTURE_ERRORS": false,

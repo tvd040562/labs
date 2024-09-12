@@ -1,4 +1,4 @@
-+timescale+1ns/1ps
++timescale+1ns/100ps
+RAM/sky130_sram_256byte_1rw1r_32x64_8.v
 counter.v
 tb.v
-sram_macros/verilog/sky130_sram_1kbyte_1rw1r_32x256_8.v

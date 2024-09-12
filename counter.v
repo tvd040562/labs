@@ -1,3 +1,4 @@
+`timescale 1ns/100ps
 `define USE_RAM
 module counter (
 	input clk,
@@ -29,14 +30,16 @@ module counter (
 	wire [31:0] temp_sine_out2;
 	wire [31:0] temp_sine_out3;
 	reg [31:0] reg_sine_out;
+	reg [7:0] cout_reg;
+	
 	assign sine_out = reg_sine_out;
 
-	sky130_sram_256byte_1r1w_32x64_8 u_mem0 (
+	sky130_sram_256byte_1rw1r_32x64_8 u_mem0 (
 		.clk0(clk),
 		.csb0(csb0),
 		.web0(web0),
 		.wmask0(wmask0),
-		.addr0(addr0),
+		.addr0(addr0[5:0]),
 		.din0(din0),
 		//.dout0(dout0),
 		.clk1(clk),
@@ -45,12 +48,12 @@ module counter (
 		.dout1(temp_sine_out0)
 	);
 
-	sky130_sram_256byte_1r1w_32x64_8 u_mem1 (
+	sky130_sram_256byte_1rw1r_32x64_8 u_mem1 (
 		.clk0(clk),
 		.csb0(csb0),
 		.web0(web0),
 		.wmask0(wmask0),
-		.addr0(addr0),
+		.addr0(addr0[5:0]),
 		.din0(din0),
 		//.dout0(dout0),
 		.clk1(clk),
@@ -59,12 +62,12 @@ module counter (
 		.dout1(temp_sine_out1)
 	);
 
-	sky130_sram_256byte_1r1w_32x64_8 u_mem2 (
+	sky130_sram_256byte_1rw1r_32x64_8 u_mem2 (
 		.clk0(clk),
 		.csb0(csb0),
 		.web0(web0),
 		.wmask0(wmask0),
-		.addr0(addr0),
+		.addr0(addr0[5:0]),
 		.din0(din0),
 		//.dout0(dout0),
 		.clk1(clk),
@@ -73,12 +76,12 @@ module counter (
 		.dout1(temp_sine_out2)
 	);
 
-	sky130_sram_256byte_1r1w_32x64_8 u_mem3 (
+	sky130_sram_256byte_1rw1r_32x64_8 u_mem3 (
 		.clk0(clk),
 		.csb0(csb0),
 		.web0(web0),
 		.wmask0(wmask0),
-		.addr0(addr0),
+		.addr0(addr0[5:0]),
 		.din0(din0),
 		//.dout0(dout0),
 		.clk1(clk),
@@ -87,11 +90,15 @@ module counter (
 		.dout1(temp_sine_out3)
 	);
 
+	always @(posedge clk) begin
+		cout_reg = cout;
+	end
+
 	always @(posedge clk or posedge reset) begin
 		if (reset)
 			reg_sine_out = 0;
 		else begin
-			case (cout[7:6])
+			case (cout_reg[7:6])
 				2'b00: reg_sine_out = temp_sine_out0;
 				2'b01: reg_sine_out = temp_sine_out1;
 				2'b10: reg_sine_out = temp_sine_out2;
@@ -101,6 +108,19 @@ module counter (
 	end
 `endif
 
+`ifdef SIMULATION
+	always @(posedge clk or posedge reset) begin
+		if (reset)
+			cout = 0;
+		else if (preload)
+			cout = pl_data;
+		else if (enable)
+			if (updn)
+				#0.1 cout = cout + incr;
+			else
+				#0.1 cout = cout - incr;
+	end
+`else
 	always @(posedge clk or posedge reset) begin
 		if (reset)
 			cout = 0;
@@ -112,4 +132,5 @@ module counter (
 			else
 				cout = cout - incr;
 	end
+`endif
 endmodule
