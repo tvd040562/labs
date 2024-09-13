@@ -21,27 +21,40 @@ module tb (
 	*/
 
 `ifdef USE_RAM
-	initial
+	task init_mem();
 		for (integer i=0; i<256; i=i+1) begin
 			value = $sin(i*$acos(-1)/128.0) * ((2**31)-1);
+			addr0 = i;
+			web0 = 0;
+			wmask0 = 4'hF;
+			din0 = value;
 			//$display("i: %3d; value: %32h", i, value);
 			if (i<64)
-				dut.u_mem0.mem[i] = value;
+				csb00 = 1'b0;
 			else if (i>=64 && i<128)
-				dut.u_mem1.mem[i-64] = value;
+				csb10 = 1'b0;
 			else if (i>=128 && i<192)
-				dut.u_mem2.mem[i-128] = value;
+				csb20 = 1'b0;
 			else
-				dut.u_mem3.mem[i-192] = value;
+				csb30 = 1'b0;
+			waitforclk(1);
+			csb00 = 1'b1;
+			csb10 = 1'b1;
+			csb20 = 1'b1;
+			csb30 = 1'b1;
 		end
+	endtask
 
-	reg csb0, web0;
+	reg csb00, csb10, csb20, csb30, web0;
 	reg [3:0] wmask0;
 	reg [7:0] addr0;
 	reg [31:0] din0;
 
 	initial begin
-		csb0 = 1'b1;
+		csb00 = 1'b1;
+		csb10 = 1'b1;
+		csb20 = 1'b1;
+		csb30 = 1'b1;
 		web0 = 1'b1;
 		wmask0 = 4'h0;
 		addr0 = 0;
@@ -89,6 +102,16 @@ module tb (
 		.pl_data(pl_data),
 		.incr(incr),
 		//.table_(table_),
+`ifdef USE_RAM
+		.csb00(csb00),
+		.csb10(csb10),
+		.csb20(csb20),
+		.csb30(csb30),
+		.web0(web0),
+		.wmask0(wmask0),
+		.addr0(addr0),
+		.din0(din0),
+`endif
 		.cout(cout)
 	);
 
@@ -105,6 +128,7 @@ module tb (
 		reset = 1;
 		waitforclk(3);
 		reset = 0;
+		init_mem();
 		waitforclk(26);
 		preload_(5);
 		waitforclk(10);

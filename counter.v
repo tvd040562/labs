@@ -9,7 +9,10 @@ module counter (
 	input [7:0] pl_data,
 	input [3:0] incr,
 `ifdef USE_RAM
-	input csb0,
+	input csb00,
+	input csb10,
+	input csb20,
+	input csb30,
 	input web0,
 	input [3:0] wmask0,
 	input [7:0] addr0,
@@ -36,7 +39,7 @@ module counter (
 
 	sky130_sram_256byte_1rw1r_32x64_8 u_mem0 (
 		.clk0(clk),
-		.csb0(csb0),
+		.csb0(csb00),
 		.web0(web0),
 		.wmask0(wmask0),
 		.addr0(addr0[5:0]),
@@ -50,7 +53,7 @@ module counter (
 
 	sky130_sram_256byte_1rw1r_32x64_8 u_mem1 (
 		.clk0(clk),
-		.csb0(csb0),
+		.csb0(csb10),
 		.web0(web0),
 		.wmask0(wmask0),
 		.addr0(addr0[5:0]),
@@ -64,7 +67,7 @@ module counter (
 
 	sky130_sram_256byte_1rw1r_32x64_8 u_mem2 (
 		.clk0(clk),
-		.csb0(csb0),
+		.csb0(csb20),
 		.web0(web0),
 		.wmask0(wmask0),
 		.addr0(addr0[5:0]),
@@ -78,7 +81,7 @@ module counter (
 
 	sky130_sram_256byte_1rw1r_32x64_8 u_mem3 (
 		.clk0(clk),
-		.csb0(csb0),
+		.csb0(csb30),
 		.web0(web0),
 		.wmask0(wmask0),
 		.addr0(addr0[5:0]),
