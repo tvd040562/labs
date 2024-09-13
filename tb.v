@@ -20,9 +20,9 @@ module tb (
 	*/
 
 `ifdef USE_RAM
-	initial
-		for (integer i=0; i<256; i=i+1)
-			dut.u_mem.mem[i] = $sin(i*$acos(-1)/128.0) * (2**31-1);
+	//initial
+		//for (integer i=0; i<256; i=i+1)
+			//dut.u_mem.mem[i] = $sin(i*$acos(-1)/128.0) * (2**31-1);
 	reg csb0, web0;
 	reg [3:0] wmask0;
 	reg [7:0] addr0;
@@ -44,6 +44,24 @@ module tb (
 		forever
 			#(`PERIOD/2) clk = ~clk;
 	end
+
+	task init_mem ();
+		begin
+			csb0 = 1'b0;
+			web0 = 1'b0;
+			wmask0 = 4'hF;
+			for (integer i=0; i<256; i=i+1) begin
+				//dut.u_mem.mem[i] = $sin(i*$acos(-1)/128.0) * (2**31-1);
+		        	din0 = $sin(i*$acos(-1)/128.0) * (2**31-1);
+				addr0 = i;
+				//$display("assign table_[%3d] = 32'H%h;", i, din0);
+				waitforclk(1);
+			end
+			csb0 = 1'b1;
+			web0 = 1'b1;
+			wmask0 = 4'h0;
+		end
+	endtask
 
 	task waitforclk (input integer n);
 		repeat (n)
@@ -76,6 +94,13 @@ module tb (
 		.preload(preload),
 		.pl_data(pl_data),
 		.incr(incr),
+	`ifdef USE_RAM
+		.csb0(csb0),
+		.web0(web0),
+		.wmask0(wmask0),
+		.addr0(addr0),
+		.din0(din0),
+	`endif
 		//.table_(table_),
 		.cout(cout)
 	);
@@ -89,10 +114,11 @@ module tb (
 		preload = 0;
 		pl_data = 0;
 		enable = 1;
-		updn = 1;
+		updn = 0;
 		reset = 1;
 		waitforclk(3);
 		reset = 0;
+		init_mem();
 		waitforclk(26);
 		preload_(5);
 		waitforclk(10);

@@ -30,9 +30,9 @@
       			]
   		}
 	},
-	"FP_PDN_MACRO_HOOKS": "u_mem vccd1 vssd1 vccd1 vssd1",
-	"SYNTH_POWER_DEFINE": "USE_POWER_PINS",
-	"FP_PDN_CHECK_NODES": false,
+	"VDD_NETS": "vccd1",
+	"GND_NETS": "vssd1",
+	"PDN_MACRO_CONNECTIONS": ["u_mem vccd1 vssd1 vccd1 vssd1"],
 	"MAGIC_CAPTURE_ERRORS": false,
 	"RUN_KLAYOUT_DRC": false,
 	"//MAGIC_DRC_USE_GDS": false,
