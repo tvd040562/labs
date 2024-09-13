@@ -6,16 +6,14 @@ module counter (
 	input enable,
 	input preload,
 	input updn,
-	input [7:0] pl_data,
+	input [6:0] pl_data,
 	input [3:0] incr,
 `ifdef USE_RAM
 	input csb00,
 	input csb10,
-	input csb20,
-	input csb30,
 	input web0,
 	input [3:0] wmask0,
-	input [7:0] addr0,
+	input [6:0] addr0,
 	input [31:0] din0,
 `endif
 	//input [31:0] table_ [0:255],
@@ -30,84 +28,48 @@ module counter (
 `else
 	wire [31:0] temp_sine_out0;
 	wire [31:0] temp_sine_out1;
-	wire [31:0] temp_sine_out2;
-	wire [31:0] temp_sine_out3;
 	reg [31:0] reg_sine_out;
 	reg [7:0] cout_reg;
 	
 	assign sine_out = reg_sine_out;
 
-	sky130_sram_256byte_1rw1r_32x64_8 u_mem0 (
+	sky130_sram_512byte_1rw1r_32x128_8 u_mem0 (
 		.clk0(clk),
 		.csb0(csb00),
 		.web0(web0),
 		.wmask0(wmask0),
-		.addr0(addr0[5:0]),
+		.addr0(addr0),
 		.din0(din0),
 		//.dout0(dout0),
 		.clk1(clk),
 		.csb1(1'b0),
-		.addr1(cout[5:0]),
+		.addr1(cout[6:0]),
 		.dout1(temp_sine_out0)
 	);
 
-	sky130_sram_256byte_1rw1r_32x64_8 u_mem1 (
+	sky130_sram_512byte_1rw1r_32x128_8 u_mem1 (
 		.clk0(clk),
 		.csb0(csb10),
 		.web0(web0),
 		.wmask0(wmask0),
-		.addr0(addr0[5:0]),
+		.addr0(addr0),
 		.din0(din0),
 		//.dout0(dout0),
 		.clk1(clk),
 		.csb1(1'b0),
-		.addr1(cout[5:0]),
+		.addr1(cout[6:0]),
 		.dout1(temp_sine_out1)
-	);
-
-	sky130_sram_256byte_1rw1r_32x64_8 u_mem2 (
-		.clk0(clk),
-		.csb0(csb20),
-		.web0(web0),
-		.wmask0(wmask0),
-		.addr0(addr0[5:0]),
-		.din0(din0),
-		//.dout0(dout0),
-		.clk1(clk),
-		.csb1(1'b0),
-		.addr1(cout[5:0]),
-		.dout1(temp_sine_out2)
-	);
-
-	sky130_sram_256byte_1rw1r_32x64_8 u_mem3 (
-		.clk0(clk),
-		.csb0(csb30),
-		.web0(web0),
-		.wmask0(wmask0),
-		.addr0(addr0[5:0]),
-		.din0(din0),
-		//.dout0(dout0),
-		.clk1(clk),
-		.csb1(1'b0),
-		.addr1(cout[5:0]),
-		.dout1(temp_sine_out3)
 	);
 
 	always @(posedge clk) begin
 		cout_reg = cout;
 	end
 
-	always @(posedge clk or posedge reset) begin
-		if (reset)
-			reg_sine_out = 0;
-		else begin
-			case (cout_reg[7:6])
-				2'b00: reg_sine_out = temp_sine_out0;
-				2'b01: reg_sine_out = temp_sine_out1;
-				2'b10: reg_sine_out = temp_sine_out2;
-		       	      default: reg_sine_out = temp_sine_out3;
-			endcase
-		end
+	always @(posedge clk) begin
+		if (cout_reg[7])
+			reg_sine_out = temp_sine_out1;
+		else
+			reg_sine_out = temp_sine_out0;
 	end
 `endif
 

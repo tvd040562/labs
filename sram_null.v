@@ -3,7 +3,7 @@
 // Word size: 32
 // Write size: 8
 
-module sky130_sram_256byte_1rw1r_32x64_8(
+module sky130_sram_512byte_1rw1r_32x128_8(
 `ifdef USE_POWER_PINS
     vccd1,
     vssd1,
@@ -16,7 +16,7 @@ module sky130_sram_256byte_1rw1r_32x64_8(
 
   parameter NUM_WMASKS = 4 ;
   parameter DATA_WIDTH = 32 ;
-  parameter ADDR_WIDTH = 6 ;
+  parameter ADDR_WIDTH = 7 ;
   parameter RAM_DEPTH = 1 << ADDR_WIDTH;
   // FIXME: This delay is arbitrary.
   parameter DELAY = 3 ;

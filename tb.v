@@ -21,6 +21,11 @@ module tb (
 	*/
 
 `ifdef USE_RAM
+	reg csb00, csb10, web0;
+	reg [3:0] wmask0;
+	reg [7:0] addr0;
+	reg [31:0] din0;
+
 	task init_mem();
 		for (integer i=0; i<256; i=i+1) begin
 			value = $sin(i*$acos(-1)/128.0) * ((2**31)-1);
@@ -29,32 +34,19 @@ module tb (
 			wmask0 = 4'hF;
 			din0 = value;
 			//$display("i: %3d; value: %32h", i, value);
-			if (i<64)
+			if (i<128)
 				csb00 = 1'b0;
-			else if (i>=64 && i<128)
-				csb10 = 1'b0;
-			else if (i>=128 && i<192)
-				csb20 = 1'b0;
 			else
-				csb30 = 1'b0;
+				csb10 = 1'b0;
 			waitforclk(1);
 			csb00 = 1'b1;
 			csb10 = 1'b1;
-			csb20 = 1'b1;
-			csb30 = 1'b1;
 		end
 	endtask
-
-	reg csb00, csb10, csb20, csb30, web0;
-	reg [3:0] wmask0;
-	reg [7:0] addr0;
-	reg [31:0] din0;
 
 	initial begin
 		csb00 = 1'b1;
 		csb10 = 1'b1;
-		csb20 = 1'b1;
-		csb30 = 1'b1;
 		web0 = 1'b1;
 		wmask0 = 4'h0;
 		addr0 = 0;
@@ -105,8 +97,6 @@ module tb (
 `ifdef USE_RAM
 		.csb00(csb00),
 		.csb10(csb10),
-		.csb20(csb20),
-		.csb30(csb30),
 		.web0(web0),
 		.wmask0(wmask0),
 		.addr0(addr0),
