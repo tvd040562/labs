@@ -28,70 +28,35 @@ module counter (
 	`include "table.vh"
 	assign sine_out = table_[cout];
 `else
-	wire [31:0] temp_sine_out0;
-	wire [31:0] temp_sine_out1;
-	wire [31:0] temp_sine_out2;
-	wire [31:0] temp_sine_out3;
+	wire [31:0] temp_sine_out[4];
 	reg [31:0] reg_sine_out;
 	reg [7:0] cout_reg;
+	wire csb0[4];
 	
 	assign sine_out = reg_sine_out;
+	assign csb0[0] = csb00;
+	assign csb0[1] = csb10;
+	assign csb0[2] = csb20;
+	assign csb0[3] = csb30;
 
-	sky130_sram_256byte_1rw1r_32x64_8 u_mem0 (
-		.clk0(clk),
-		.csb0(csb00),
-		.web0(web0),
-		.wmask0(wmask0),
-		.addr0(addr0[5:0]),
-		.din0(din0),
-		//.dout0(dout0),
-		.clk1(clk),
-		.csb1(1'b0),
-		.addr1(cout[5:0]),
-		.dout1(temp_sine_out0)
-	);
-
-	sky130_sram_256byte_1rw1r_32x64_8 u_mem1 (
-		.clk0(clk),
-		.csb0(csb10),
-		.web0(web0),
-		.wmask0(wmask0),
-		.addr0(addr0[5:0]),
-		.din0(din0),
-		//.dout0(dout0),
-		.clk1(clk),
-		.csb1(1'b0),
-		.addr1(cout[5:0]),
-		.dout1(temp_sine_out1)
-	);
-
-	sky130_sram_256byte_1rw1r_32x64_8 u_mem2 (
-		.clk0(clk),
-		.csb0(csb20),
-		.web0(web0),
-		.wmask0(wmask0),
-		.addr0(addr0[5:0]),
-		.din0(din0),
-		//.dout0(dout0),
-		.clk1(clk),
-		.csb1(1'b0),
-		.addr1(cout[5:0]),
-		.dout1(temp_sine_out2)
-	);
-
-	sky130_sram_256byte_1rw1r_32x64_8 u_mem3 (
-		.clk0(clk),
-		.csb0(csb30),
-		.web0(web0),
-		.wmask0(wmask0),
-		.addr0(addr0[5:0]),
-		.din0(din0),
-		//.dout0(dout0),
-		.clk1(clk),
-		.csb1(1'b0),
-		.addr1(cout[5:0]),
-		.dout1(temp_sine_out3)
-	);
+	genvar i;
+	generate
+		for (i=0; i<4; i=i+1) begin
+		sky130_sram_256byte_1rw1r_32x64_8 u_mem (
+			.clk0(clk),
+			.csb0(csb0[i]),
+			.web0(web0),
+			.wmask0(wmask0),
+			.addr0(addr0[5:0]),
+			.din0(din0),
+			//.dout0(dout0),
+			.clk1(clk),
+			.csb1(1'b0),
+			.addr1(cout[5:0]),
+			.dout1(temp_sine_out[i])
+		);
+		end
+	endgenerate
 
 	always @(posedge clk) begin
 		cout_reg = cout;
@@ -102,10 +67,10 @@ module counter (
 			reg_sine_out = 0;
 		else begin
 			case (cout_reg[7:6])
-				2'b00: reg_sine_out = temp_sine_out0;
-				2'b01: reg_sine_out = temp_sine_out1;
-				2'b10: reg_sine_out = temp_sine_out2;
-		       	      default: reg_sine_out = temp_sine_out3;
+				2'b00: reg_sine_out = temp_sine_out[0];
+				2'b01: reg_sine_out = temp_sine_out[1];
+				2'b10: reg_sine_out = temp_sine_out[2];
+		       	      default: reg_sine_out = temp_sine_out[3];
 			endcase
 		end
 	end

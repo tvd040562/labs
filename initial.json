@@ -14,28 +14,28 @@
 	"MACROS": {
   		"sky130_sram_256byte_1rw1r_32x64_8": {
       			"instances": {
-          			"u_mem0": {
+          			"genblk1[0].u_mem": {
               				"location": [
                   				75,
                   				75
               				],
               				"orientation": "N"
           			},
-          			"u_mem1": {
+          			"genblk1[1].u_mem": {
               				"location": [
                   				550,
                   				75
               				],
               				"orientation": "N"
           			},
-          			"u_mem2": {
+          			"genblk1[2].u_mem": {
               				"location": [
                   				75,
                   				450
               				],
               				"orientation": "N"
           			},
-          			"u_mem3": {
+          			"genblk1[3].u_mem": {
               				"location": [
                   				550,
                   				450
@@ -43,6 +43,9 @@
               				"orientation": "N"
           			}
       			},
+      			"lib": {
+          			"*": ["dir::./RAM/sky130_sram_256byte_1rw1r_32x64_8_TT_1p8V_25C.lib"]
+			},
       			"gds": [
           			"dir::./RAM/sky130_sram_256byte_1rw1r_32x64_8.gds"
       			],
@@ -53,10 +56,7 @@
 	},
 	"VDD_NETS": "vccd1",
 	"GND_NETS": "vssd1",
-	"PDN_MACRO_CONNECTIONS": ["u_mem0 vccd1 vssd1 vccd1 vssd1",
-		               "u_mem1 vccd1 vssd1 vccd1 vssd1",
-		               "u_mem2 vccd1 vssd1 vccd1 vssd1",
-		               "u_mem3 vccd1 vssd1 vccd1 vssd1"],
+	"PDN_MACRO_CONNECTIONS": ["genblk.*\\.u_mem vccd1 vssd1 vccd1 vssd1"],
 	"MAGIC_CAPTURE_ERRORS": false,
 	"RUN_KLAYOUT_DRC": false,
 	"//MAGIC_DRC_USE_GDS": false,
