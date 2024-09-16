@@ -16,7 +16,7 @@ set_input_delay $IO_DELAY -clock [get_clocks {clk}] -add_delay [get_ports {addr0
 set_input_delay $IO_DELAY -clock [get_clocks {clk}] -add_delay [get_ports {addr0[4]}]
 set_input_delay $IO_DELAY -clock [get_clocks {clk}] -add_delay [get_ports {addr0[5]}]
 set_input_delay $IO_DELAY -clock [get_clocks {clk}] -add_delay [get_ports {addr0[6]}]
-set_input_delay $IO_DELAY -clock [get_clocks {clk}] -add_delay [get_ports {csb00 csb10}]
+#set_input_delay $IO_DELAY -clock [get_clocks {clk}] -add_delay [get_ports {csb00 csb10}]
 set_input_delay $IO_DELAY -clock [get_clocks {clk}] -add_delay [get_ports {din0[0]}]
 set_input_delay $IO_DELAY -clock [get_clocks {clk}] -add_delay [get_ports {din0[10]}]
 set_input_delay $IO_DELAY -clock [get_clocks {clk}] -add_delay [get_ports {din0[11]}]
@@ -220,6 +220,6 @@ set_driving_cell -lib_cell sky130_fd_sc_hd__inv_2 -pin {Y} -input_transition_ris
 set_max_transition $::env(MAX_TRANSITION_CONSTRAINT) [current_design]
 set_max_capacitance 0.2000 [current_design]
 set_max_fanout $::env(MAX_FANOUT_CONSTRAINT) [current_design]
-set_false_path --from [get_ports {reset pl_data[*]}] --to [get_clocks {clk}]
+set_false_path --from [get_ports {reset pl_data[*] csb00 csb10}] --to [get_clocks {clk}]
 
 

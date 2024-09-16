@@ -26,40 +26,35 @@ module counter (
 	`include "table.vh"
 	assign sine_out = table_[cout];
 `else
-	wire [31:0] temp_sine_out0;
-	wire [31:0] temp_sine_out1;
 	reg [31:0] reg_sine_out;
 	reg [7:0] cout_reg;
 	
 	assign sine_out = reg_sine_out;
 
-	sky130_sram_512byte_1rw1r_32x128_8 u_mem0 (
-		.clk0(clk),
-		.csb0(csb00),
-		.web0(web0),
-		.wmask0(wmask0),
-		.addr0(addr0),
-		.din0(din0),
-		//.dout0(dout0),
-		.clk1(clk),
-		.csb1(1'b0),
-		.addr1(cout[6:0]),
-		.dout1(temp_sine_out0)
-	);
 
-	sky130_sram_512byte_1rw1r_32x128_8 u_mem1 (
-		.clk0(clk),
-		.csb0(csb10),
-		.web0(web0),
-		.wmask0(wmask0),
-		.addr0(addr0),
-		.din0(din0),
-		//.dout0(dout0),
-		.clk1(clk),
-		.csb1(1'b0),
-		.addr1(cout[6:0]),
-		.dout1(temp_sine_out1)
-	);
+	wire [31:0] temp_sine_out[2];
+	wire csb0[2];
+	assign csb0[0] = csb00;
+	assign csb0[1] = csb10;
+
+	genvar i;
+	generate
+		for (i = 0; i < 2; i = i+1) begin
+		sky130_sram_512byte_1rw1r_32x128_8 u_mem (
+			.clk0(clk),
+			.csb0(csb0[i]),
+			.web0(web0),
+			.wmask0(wmask0),
+			.addr0(addr0),
+			.din0(din0),
+			//.dout0(dout0),
+			.clk1(clk),
+			.csb1(1'b0),
+			.addr1(cout[6:0]),
+			.dout1(temp_sine_out[i])
+		);
+		end
+	endgenerate
 
 	always @(posedge clk) begin
 		cout_reg = cout;
@@ -67,9 +62,9 @@ module counter (
 
 	always @(posedge clk) begin
 		if (cout_reg[7])
-			reg_sine_out = temp_sine_out1;
+			reg_sine_out = temp_sine_out[1];
 		else
-			reg_sine_out = temp_sine_out0;
+			reg_sine_out = temp_sine_out[0];
 	end
 `endif
 
