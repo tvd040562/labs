@@ -2,55 +2,139 @@
 	"DESIGN_NAME": "counter",
 	"VERILOG_FILES": ["dir::sram_null.v", "dir::counter.v"],
 	"CLOCK_PORT": "clk",
-	"CLOCK_PERIOD": 7.1,
+	"CLOCK_PERIOD": 9.0,
 	"FALLBACK_SDC_FILE": "dir::counter.sdc",
 	"FP_SIZING": "absolute",
-	"DIE_AREA": "0 0 1000 800",
+	"DIE_AREA": "0 0 1475 1175",
 	"MAX_FANOUT_CONSTRAINT": 6,
 	"MAX_TRANSITION_CONSTRAINT": 0.5,
-	"//RUN_POST_GPL_DESIGN_REPAIR": true,
-	"//GRT_RESIZER_SETUP_MAX_BUFFER_PCT": 50,
-	"//RUN_POST_GRT_RESIZER_TIMING": true,
+	"RUN_POST_GPL_DESIGN_REPAIR": true,
+	"GRT_RESIZER_SETUP_MAX_BUFFER_PCT": 50,
+	"RUN_POST_GRT_RESIZER_TIMING": true,
 	"MACROS": {
-  		"sky130_sram_256byte_1rw1r_32x64_8": {
+  		"sky130_sram_64byte_1rw1r_8x64_8": {
       			"instances": {
-          			"genblk1[0].u_mem": {
+          			"genblk1[0].genblk1[0].u_mem": {
               				"location": [
                   				75,
                   				75
               				],
               				"orientation": "N"
           			},
-          			"genblk1[1].u_mem": {
+          			"genblk1[1].genblk1[0].u_mem": {
               				"location": [
-                  				550,
+                  				425,
                   				75
               				],
               				"orientation": "N"
           			},
-          			"genblk1[2].u_mem": {
+          			"genblk1[2].genblk1[0].u_mem": {
               				"location": [
-                  				75,
-                  				450
+                  				775,
+                  				75
               				],
               				"orientation": "N"
           			},
-          			"genblk1[3].u_mem": {
+          			"genblk1[3].genblk1[0].u_mem": {
               				"location": [
-                  				550,
-                  				450
+                  				1125,
+                  				75
+              				],
+              				"orientation": "N"
+          			},
+          			"genblk1[0].genblk1[1].u_mem": {
+              				"location": [
+                  				75,
+                  				350
+              				],
+              				"orientation": "N"
+          			},
+          			"genblk1[1].genblk1[1].u_mem": {
+              				"location": [
+                  				425,
+                  				350
+              				],
+              				"orientation": "N"
+          			},
+          			"genblk1[2].genblk1[1].u_mem": {
+              				"location": [
+                  				775,
+                  				350
+              				],
+              				"orientation": "N"
+          			},
+          			"genblk1[3].genblk1[1].u_mem": {
+              				"location": [
+                  				1125,
+                  				350
+              				],
+              				"orientation": "N"
+          			},
+          			"genblk1[0].genblk1[2].u_mem": {
+              				"location": [
+                  				75,
+                  				625
+              				],
+              				"orientation": "N"
+          			},
+          			"genblk1[1].genblk1[2].u_mem": {
+              				"location": [
+                  				425,
+                  				625
+              				],
+              				"orientation": "N"
+          			},
+          			"genblk1[2].genblk1[2].u_mem": {
+              				"location": [
+                  				775,
+                  				625
+              				],
+              				"orientation": "N"
+          			},
+          			"genblk1[3].genblk1[2].u_mem": {
+              				"location": [
+                  				1125,
+                  				625
+              				],
+              				"orientation": "N"
+          			},
+          			"genblk1[0].genblk1[3].u_mem": {
+              				"location": [
+                  				75,
+                  				900
+              				],
+              				"orientation": "N"
+          			},
+          			"genblk1[1].genblk1[3].u_mem": {
+              				"location": [
+                  				425,
+                  				900
+              				],
+              				"orientation": "N"
+          			},
+          			"genblk1[2].genblk1[3].u_mem": {
+              				"location": [
+                  				775,
+                  				900
+              				],
+              				"orientation": "N"
+          			},
+          			"genblk1[3].genblk1[3].u_mem": {
+              				"location": [
+                  				1125,
+                  				900
               				],
               				"orientation": "N"
           			}
       			},
       			"lib": {
-          			"*": ["dir::./RAM/sky130_sram_256byte_1rw1r_32x64_8_TT_1p8V_25C.lib"]
+          			"*": ["dir::./RAM64/sky130_sram_64byte_1rw1r_8x64_8_TT_1p8V_25C.lib"]
 			},
       			"gds": [
-          			"dir::./RAM/sky130_sram_256byte_1rw1r_32x64_8.gds"
+          			"dir::./RAM64/sky130_sram_64byte_1rw1r_8x64_8.gds"
       			],
       			"lef": [
-          			"dir::./RAM/sky130_sram_256byte_1rw1r_32x64_8.lef"
+          			"dir::./RAM64/sky130_sram_64byte_1rw1r_8x64_8.lef"
       			]
   		}
 	},
