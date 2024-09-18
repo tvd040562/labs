@@ -5,7 +5,7 @@ module tb (
 	//input reset,
 );
 	reg clk, reset, preload, enable, updn;
-	reg [3:0] pl_data;
+	reg [7:0] pl_data;
 	reg [3:0] incr;
 	wire [7:0] cout;
 	wire clk_delay;
@@ -20,13 +20,19 @@ module tb (
 	*/
 
 `ifdef USE_RAM
-	initial
-		for (integer i=0; i<256; i=i+1)
-			dut.u_mem.mem[i] = $sin(i*$acos(-1)/128.0) * (2**31-1);
 	reg csb0, web0;
 	reg [3:0] wmask0;
 	reg [7:0] addr0;
 	reg [31:0] din0;
+
+`ifdef READMEM
+	initial $readmemh("readmem.txt", dut.u_mem.mem);
+`else
+	initial
+		for (integer i=0; i<256; i=i+1)
+			dut.u_mem.mem[i] = $sin(i*$acos(-1)/128.0) * (2**31-1);
+			//$display("%8h", $sin(i*$acos(-1)/128.0) * (2**31-1));
+`endif
 
 	initial begin
 		csb0 = 1'b1;
@@ -77,7 +83,15 @@ module tb (
 		.pl_data(pl_data),
 		.incr(incr),
 		//.table_(table_),
-		.cout(cout)
+`ifdef USE_RAM
+		.csb0(csb0),
+		.web0(web0),
+		.wmask0(wmask0),
+		.addr0(addr0),
+		.din0(din0),
+`endif
+		.cout(cout),
+		.sine_out(sine_out)
 	);
 
 	//initial $display("Hello world\n");

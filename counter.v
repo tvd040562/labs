@@ -5,7 +5,7 @@ module counter (
 	input enable,
 	input preload,
 	input updn,
-	input [3:0] pl_data,
+	input [7:0] pl_data,
 	input [3:0] incr,
 `ifdef USE_RAM
 	input csb0,
