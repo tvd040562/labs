@@ -52,7 +52,7 @@ module tb (
 			wmask0 = 4'hF;
 			for (integer i=0; i<256; i=i+1) begin
 				//dut.u_mem.mem[i] = $sin(i*$acos(-1)/128.0) * (2**31-1);
-		        	din0 = $sin(i*$acos(-1)/128.0) * (2**31-1);
+		        	din0 = $tan(i*$acos(-1)/128.0) * (2**31-1);
 				addr0 = i;
 				//$display("assign table_[%3d] = 32'H%h;", i, din0);
 				waitforclk(1);
