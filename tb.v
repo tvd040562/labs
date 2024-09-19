@@ -25,32 +25,42 @@ module tb (
 	reg [3:0] csb10;
         reg [3:0] csb20;
         reg [3:0] csb30;
+        reg [3:0] csb40;
+        reg [3:0] csb50;
+        reg [3:0] csb60;
+        reg [3:0] csb70;
        	reg web0;
 	reg [3:0] wmask0;
 	reg [7:0] addr0;
 	reg [31:0] din0;
 
 	task init_mem();
-		for (integer i=0; i<256; i=i+1) begin
+		for (reg [8:0] i=0; i<256; i=i+1) begin
 			value = $sin(i*$acos(-1)/128.0) * ((2**31)-1);
 			addr0 = i;
 			web0 = 0;
 			wmask0 = 4'hF;
 			din0 = value;
 			//$display("i: %3d; value: %32h", i, value);
-			if (i<64)
-				csb00 = 4'h0;
-			else if (i>=64 && i<128)
-				csb10 = 4'h0;
-			else if (i>=128 && i<192)
-				csb20 = 4'h0;
-			else
-				csb30 = 4'h0;
+			case (i[7:5])
+				3'b000: csb00 = 4'h0;
+				3'b001: csb10 = 4'h0;
+				3'b010: csb20 = 4'h0;
+				3'b011: csb30 = 4'h0;
+				3'b100: csb40 = 4'h0;
+				3'b101: csb50 = 4'h0;
+				3'b110: csb60 = 4'h0;
+				default: csb70 = 4'h0;
+			endcase
 			waitforclk(1);
 			csb00 = 4'hf;
 			csb10 = 4'hf;
 			csb20 = 4'hf;
 			csb30 = 4'hf;
+			csb40 = 4'hf;
+			csb50 = 4'hf;
+			csb60 = 4'hf;
+			csb70 = 4'hf;
 		end
 	endtask
 
@@ -59,6 +69,10 @@ module tb (
 		csb10 = 4'hf;
 		csb20 = 4'hf;
 		csb30 = 4'hf;
+		csb40 = 4'hf;
+		csb50 = 4'hf;
+		csb60 = 4'hf;
+		csb70 = 4'hf;
 		web0 = 1'b1;
 		wmask0 = 4'h0;
 		addr0 = 0;
@@ -104,19 +118,23 @@ module tb (
 		.updn(updn),
 		.preload(preload),
 		.pl_data(pl_data),
-		.incr(incr),
+		//.cout(cout)
 		//.table_(table_),
 `ifdef USE_RAM
 		.csb00(csb00),
 		.csb10(csb10),
 		.csb20(csb20),
 		.csb30(csb30),
+		.csb40(csb40),
+		.csb50(csb50),
+		.csb60(csb60),
+		.csb70(csb70),
 		.web0(web0),
 		.wmask0(wmask0),
 		.addr0(addr0),
 		.din0(din0),
 `endif
-		.cout(cout)
+		.incr(incr)
 	);
 
 	//initial $display("Hello world\n");
