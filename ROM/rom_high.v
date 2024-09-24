@@ -34,7 +34,9 @@ module rom_high(
   reg [DATA_WIDTH-1:0]    mem [0:ROM_DEPTH-1];
 
   initial begin
-    $readmemb("sineH.bin",mem,0,ROM_DEPTH-1);
+    int FILE_ID_H = $fopen("sineH.bin", "rb");
+    $fread(mem, FILE_ID_H);
+    $fclose(FILE_ID_H);
   end
 
   reg  cs0_reg;

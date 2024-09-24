@@ -1,10 +1,5 @@
 `define USE_RAM
-`define USE_POWER_PINS
 module counter (
-`ifdef USE_POWER_PINS
-    vccd1,
-    vssd1,
-`endif
 	input clk,
 	input reset,
 	input enable,
@@ -32,10 +27,6 @@ module counter (
 	assign sine_out = reg_sine_out;
 
 	rom_high u_mem_H (
-`ifdef USE_POWER_PINS
-		.vccd1(vccd1),
-		.vssd1(vssd1),
-`endif
 		.clk0(clk),
 		.cs0(1'b1),
 		.addr0(cout),
@@ -43,10 +34,6 @@ module counter (
 	);
 
 	rom_low u_mem_L (
-`ifdef USE_POWER_PINS
-		.vccd1(vccd1),
-		.vssd1(vssd1),
-`endif
 		.clk0(clk),
 		.cs0(1'b1),
 		.addr0(cout),

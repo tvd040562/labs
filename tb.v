@@ -5,7 +5,7 @@ module tb (
 	//input reset,
 );
 	reg clk, reset, preload, enable, updn;
-	reg [3:0] pl_data;
+	reg [7:0] pl_data;
 	reg [3:0] incr;
 	wire [7:0] cout;
 	wire clk_delay;
@@ -20,7 +20,7 @@ module tb (
 		int fileID_L = $fopen("sineL.bin", "wb");
 		int fileID_H = $fopen("sineH.bin", "wb");
 		for (integer i=0; i<256; i=i+1) begin
-		        table_ = $sin(i*$acos(-1)/128.0) * (2**30);
+		        table_ = $sin(i*$acos(-1)/128.0) * (2**31-1);
 			{word_H,word_L} = table_;
 			$fwrite(fileID_L, "%c%c", word_L[15:8], word_L[7:0]);
 			$fwrite(fileID_H, "%c%c", word_H[15:8], word_H[7:0]);
