@@ -9,33 +9,26 @@ module tb (
 	reg [3:0] incr;
 	wire [7:0] cout;
 	wire clk_delay;
-	/*
-	reg [31:0] table_ [0:255];
+	
+	reg [31:0] table_;
 
-	initial
-		for (integer i=0; i<256; i=i+1) begin
-		        table_[i] = $sin(i*$acos(-1)/128.0) * (2**31-1);
-			$display("assign table_[%3d] = 32'H%h;", i, table_[i]);
-		end
-	*/
+	reg [15:0] word_L;
+	reg [15:0] word_H;
 
-`ifdef USE_RAM
-	//initial
-		//for (integer i=0; i<256; i=i+1)
-			//dut.u_mem.mem[i] = $sin(i*$acos(-1)/128.0) * (2**31-1);
-	reg csb0, web0;
-	reg [3:0] wmask0;
-	reg [7:0] addr0;
-	reg [31:0] din0;
-
+	`ifdef ROMGEN
 	initial begin
-		csb0 = 1'b1;
-		web0 = 1'b1;
-		wmask0 = 4'h0;
-		addr0 = 0;
-		din0 = 0;
+		int fileID_L = $fopen("sineL.bin", "wb");
+		int fileID_H = $fopen("sineH.bin", "wb");
+		for (integer i=0; i<256; i=i+1) begin
+		        table_ = $sin(i*$acos(-1)/128.0) * (2**30);
+			{word_H,word_L} = table_;
+			$fwrite(fileID_L, "%c%c", word_L[15:8], word_L[7:0]);
+			$fwrite(fileID_H, "%c%c", word_H[15:8], word_H[7:0]);
+		end
+		$fclose(fileID_L);
+		$fclose(fileID_H);
 	end
-`endif
+	`endif
 
 	assign #(`CLK_DELAY) clk_delay = clk;
 
@@ -44,24 +37,6 @@ module tb (
 		forever
 			#(`PERIOD/2) clk = ~clk;
 	end
-
-	task init_mem ();
-		begin
-			csb0 = 1'b0;
-			web0 = 1'b0;
-			wmask0 = 4'hF;
-			for (integer i=0; i<256; i=i+1) begin
-				//dut.u_mem.mem[i] = $sin(i*$acos(-1)/128.0) * (2**31-1);
-		        	din0 = $tan(i*$acos(-1)/128.0) * (2**31-1);
-				addr0 = i;
-				//$display("assign table_[%3d] = 32'H%h;", i, din0);
-				waitforclk(1);
-			end
-			csb0 = 1'b1;
-			web0 = 1'b1;
-			wmask0 = 4'h0;
-		end
-	endtask
 
 	task waitforclk (input integer n);
 		repeat (n)
@@ -94,13 +69,6 @@ module tb (
 		.preload(preload),
 		.pl_data(pl_data),
 		.incr(incr),
-	`ifdef USE_RAM
-		.csb0(csb0),
-		.web0(web0),
-		.wmask0(wmask0),
-		.addr0(addr0),
-		.din0(din0),
-	`endif
 		//.table_(table_),
 		.cout(cout)
 	);
@@ -118,7 +86,7 @@ module tb (
 		reset = 1;
 		waitforclk(3);
 		reset = 0;
-		init_mem();
+		//init_mem();
 		waitforclk(26);
 		preload_(5);
 		waitforclk(10);

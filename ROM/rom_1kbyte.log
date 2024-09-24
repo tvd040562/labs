@@ -1,0 +1,36 @@
+[2024-09-23 13:42:11.245667] |==============================================================================|
+[2024-09-23 13:42:11.245839] |=========                      OpenRAM v1.2.48                       =========|
+[2024-09-23 13:42:11.245913] |=========                                                            =========|
+[2024-09-23 13:42:11.245978] |=========               VLSI Design and Automation Lab               =========|
+[2024-09-23 13:42:11.246039] |=========        Computer Science and Engineering Department         =========|
+[2024-09-23 13:42:11.246098] |=========            University of California Santa Cruz             =========|
+[2024-09-23 13:42:11.246155] |=========                                                            =========|
+[2024-09-23 13:42:11.246207] |=========          Usage help: openram-user-group@ucsc.edu           =========|
+[2024-09-23 13:42:11.246256] |=========        Development help: openram-dev-group@ucsc.edu        =========|
+[2024-09-23 13:42:11.246319] |=========                See LICENSE for license info                =========|
+[2024-09-23 13:42:11.246375] |==============================================================================|
+[2024-09-23 13:42:11.246446] ** Start: 09/23/2024 13:42:11
+[2024-09-23 13:42:11.246496] Output files are: 
+[2024-09-23 13:42:11.246544] /home/lroot/labs/ROM/rom_1kbyte.sp
+[2024-09-23 13:42:11.246602] /home/lroot/labs/ROM/rom_1kbyte.v
+[2024-09-23 13:42:11.246657] /home/lroot/labs/ROM/rom_1kbyte.lef
+[2024-09-23 13:42:11.246713] /home/lroot/labs/ROM/rom_1kbyte.gds
+[2024-09-23 13:42:11.249771] create rom of word size 4 with 256 num of words
+[2024-09-23 13:42:32.257739] WARNING: file hierarchy_layout.py: line 976: Pins don't align well so copying pins instead of connecting with pin.
+
+[2024-09-23 13:42:32.258402] WARNING: file hierarchy_layout.py: line 976: Pins don't align well so copying pins instead of connecting with pin.
+
+[2024-09-23 13:42:32.258797] WARNING: file hierarchy_layout.py: line 976: Pins don't align well so copying pins instead of connecting with pin.
+
+[2024-09-23 13:42:32.259166] WARNING: file hierarchy_layout.py: line 976: Pins don't align well so copying pins instead of connecting with pin.
+
+[2024-09-23 13:42:32.259708] WARNING: file hierarchy_layout.py: line 976: Pins don't align well so copying pins instead of connecting with pin.
+
+[2024-09-23 13:42:32.260069] WARNING: file hierarchy_layout.py: line 976: Pins don't align well so copying pins instead of connecting with pin.
+
+[2024-09-23 13:42:32.260447] WARNING: file hierarchy_layout.py: line 976: Pins don't align well so copying pins instead of connecting with pin.
+
+[2024-09-23 13:42:32.414385] ** Submodules: 21.2 seconds
+[2024-09-23 13:42:32.415497] ** Placement: 0.0 seconds
+[2024-09-23 13:43:14.114161] ERROR: file signal_escape_router.py: line 70: Couldn't route from (dout0[27] layer=m3 ll=v[112.78,-0.16] ur=v[113.27,0.33]) to (dout0[27] layer=m3 ll=v[113.0,-0.105] ur=v[113.38,0.275]).
+

@@ -1,52 +1,63 @@
 `define USE_RAM
+`define USE_POWER_PINS
 module counter (
+`ifdef USE_POWER_PINS
+    vccd1,
+    vssd1,
+`endif
 	input clk,
 	input reset,
 	input enable,
 	input preload,
 	input updn,
-	input [3:0] pl_data,
+	input [7:0] pl_data,
 	input [3:0] incr,
-`ifdef USE_RAM
-	input csb0,
-	input web0,
-	input [3:0] wmask0,
-	input [7:0] addr0,
-	input [31:0] din0,
-`endif
 	//input [31:0] table_ [0:255],
 	output reg [7:0] cout,
 	output [31:0] sine_out
 );
 
+`ifdef USE_POWER_PINS
+    inout vccd1;
+    inout vssd1;
+`endif
 `ifndef USE_RAM
 	reg [31:0] table_ [0:255];
 	`include "table.vh"
 	assign sine_out = table_[cout];
 `else
-	reg [31:0] temp_sine_out;
+	reg [15:0] temp_sine_out_H;
+	reg [15:0] temp_sine_out_L;
 	reg [31:0] reg_sine_out;
 	assign sine_out = reg_sine_out;
 
-	sky130_sram_1kbyte_1rw1r_32x256_8 u_mem (
+	rom_high u_mem_H (
+`ifdef USE_POWER_PINS
+		.vccd1(vccd1),
+		.vssd1(vssd1),
+`endif
 		.clk0(clk),
-		.csb0(csb0),
-		.web0(web0),
-		.wmask0(wmask0),
-		.addr0(addr0),
-		.din0(din0),
-		//.dout0(dout0),
-		.clk1(clk),
-		.csb1(1'b0),
-		.addr1(cout),
-		.dout1(temp_sine_out)
+		.cs0(1'b1),
+		.addr0(cout),
+		.dout0(temp_sine_out_H)
+	);
+
+	rom_low u_mem_L (
+`ifdef USE_POWER_PINS
+		.vccd1(vccd1),
+		.vssd1(vssd1),
+`endif
+		.clk0(clk),
+		.cs0(1'b1),
+		.addr0(cout),
+		.dout0(temp_sine_out_L)
 	);
 
 	always @(posedge clk or posedge reset) begin
 		if (reset)
 			reg_sine_out = 0;
 		else 
-			reg_sine_out = temp_sine_out;
+			reg_sine_out = {temp_sine_out_H,temp_sine_out_L};
 	end
 `endif
 

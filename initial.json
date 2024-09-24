@@ -1,41 +1,59 @@
 {
 	"DESIGN_NAME": "counter",
-	"VERILOG_FILES": ["dir::sram_null.v", "dir::counter.v"],
+	"VERILOG_FILES": ["dir::rom_null.v", "dir::counter.v"],
 	"CLOCK_PORT": "clk",
 	"CLOCK_PERIOD": 5.0,
 	"FALLBACK_SDC_FILE": "dir::counter.sdc",
-	"//FP_SIZING": "absolute",
-	"//DIE_AREA": "0 0 700 600",
+	"FP_SIZING": "absolute",
+	"DIE_AREA": "0 0 350 200",
 	"MAX_FANOUT_CONSTRAINT": 4,
 	"MAX_TRANSITION_CONSTRAINT": 0.4,
 	"RUN_POST_GPL_DESIGN_REPAIR": true,
 	"GRT_RESIZER_SETUP_MAX_BUFFER_PCT": 50,
 	"RUN_POST_GRT_RESIZER_TIMING": true,
+	"//FP_PDN_MULTILAYER": false,
+	"//FP_PDN_CORE_RING": false,
+	"//RT_MAX_LAYER": "met4",
+	"//SYNTH_USE_PG_PINS_DEFINES": "USE_POWER_PINS",
 	"MACROS": {
-  		"sky130_sram_1kbyte_1rw1r_32x256_8": {
+  		"rom_high": {
       			"instances": {
-          			"u_mem": {
+          			"u_mem_H": {
               				"location": [
-                  				100,
-                  				100
+                  				50,
+                  				50
               				],
               				"orientation": "N"
           			}
       			},
-      			"lib": {
-          			"*": ["dir::./sram_macros/lib/sky130_sram_1kbyte_1rw1r_32x256_8_TT_1p8V_25C.lib"]
-      			},
       			"gds": [
-          			"dir::./sram_macros/gds/sky130_sram_1kbyte_1rw1r_32x256_8.gds"
+          			"dir::./ROM/rom_high.gds"
       			],
       			"lef": [
-          			"dir::./sram_macros/lef/sky130_sram_1kbyte_1rw1r_32x256_8.lef"
+          			"dir::./ROM/rom_high.lef"
+      			]
+  		},
+  		"rom_low": {
+      			"instances": {
+          			"u_mem_L": {
+              				"location": [
+                  				200,
+                  				50
+              				],
+              				"orientation": "N"
+          			}
+      			},
+      			"gds": [
+          			"dir::./ROM/rom_low.gds"
+      			],
+      			"lef": [
+          			"dir::./ROM/rom_low.lef"
       			]
   		}
 	},
 	"VDD_NETS": "vccd1",
 	"GND_NETS": "vssd1",
-	"PDN_MACRO_CONNECTIONS": ["u_mem vccd1 vssd1 vccd1 vssd1"],
+	"PDN_MACRO_CONNECTIONS": ["u_mem_.* vccd1 vssd1 vccd1 vssd1"],
 	"MAGIC_CAPTURE_ERRORS": false,
 	"RUN_KLAYOUT_DRC": false,
 	"//MAGIC_DRC_USE_GDS": false,
