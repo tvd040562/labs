@@ -12,10 +12,6 @@ module counter (
 	output [31:0] sine_out
 );
 
-`ifdef USE_POWER_PINS
-    inout vccd1;
-    inout vssd1;
-`endif
 `ifndef USE_RAM
 	reg [31:0] table_ [0:255];
 	`include "table.vh"

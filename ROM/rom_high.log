@@ -1,36 +1,36 @@
-[2024-09-24 08:25:33.370555] |==============================================================================|
-[2024-09-24 08:25:33.372490] |=========                      OpenRAM v1.2.48                       =========|
-[2024-09-24 08:25:33.372625] |=========                                                            =========|
-[2024-09-24 08:25:33.372824] |=========               VLSI Design and Automation Lab               =========|
-[2024-09-24 08:25:33.373067] |=========        Computer Science and Engineering Department         =========|
-[2024-09-24 08:25:33.373130] |=========            University of California Santa Cruz             =========|
-[2024-09-24 08:25:33.373179] |=========                                                            =========|
-[2024-09-24 08:25:33.373284] |=========          Usage help: openram-user-group@ucsc.edu           =========|
-[2024-09-24 08:25:33.373336] |=========        Development help: openram-dev-group@ucsc.edu        =========|
-[2024-09-24 08:25:33.373433] |=========                See LICENSE for license info                =========|
-[2024-09-24 08:25:33.373519] |==============================================================================|
-[2024-09-24 08:25:33.373614] ** Start: 09/24/2024 08:25:33
-[2024-09-24 08:25:33.373687] Output files are: 
-[2024-09-24 08:25:33.373764] /home/lroot/labs/ROM/rom_high.sp
-[2024-09-24 08:25:33.373832] /home/lroot/labs/ROM/rom_high.v
-[2024-09-24 08:25:33.373889] /home/lroot/labs/ROM/rom_high.lef
-[2024-09-24 08:25:33.373963] /home/lroot/labs/ROM/rom_high.gds
-[2024-09-24 08:25:33.375462] create rom of word size 2 with 256 num of words
-[2024-09-24 08:25:39.651490] ** Submodules: 6.3 seconds
-[2024-09-24 08:25:39.652521] ** Placement: 0.0 seconds
-[2024-09-24 08:26:02.629555] ** Routing: 23.0 seconds
-[2024-09-24 08:28:54.065928] ** Verification: 171.4 seconds
-[2024-09-24 08:28:54.066500] ** ROM creation: 200.7 seconds
-[2024-09-24 08:28:54.067003] SP: Writing to /home/lroot/labs/ROM/rom_high.sp
-[2024-09-24 08:28:54.180242] ** Spice writing: 0.1 seconds
-[2024-09-24 08:28:54.180390] GDS: Writing to /home/lroot/labs/ROM/rom_high.gds
-[2024-09-24 08:28:54.293076] ** GDS: 0.1 seconds
-[2024-09-24 08:28:54.293258] LEF: Writing to /home/lroot/labs/ROM/rom_high.lef
-[2024-09-24 08:28:54.295156] ** LEF: 0.0 seconds
-[2024-09-24 08:28:54.295279] LVS: Writing to /home/lroot/labs/ROM/rom_high.lvs.sp
-[2024-09-24 08:28:54.366959] ** LVS writing: 0.1 seconds
-[2024-09-24 08:28:54.367239] Config: Writing to /home/lroot/labs/ROM/rom_high.py
-[2024-09-24 08:28:54.367336] ** Config: 0.0 seconds
-[2024-09-24 08:28:54.367388] Verilog: Writing to /home/lroot/labs/ROM/rom_high.v
-[2024-09-24 08:28:54.367619] ** Verilog: 0.0 seconds
-[2024-09-24 08:28:54.373891] ** End: 201.0 seconds
+[2024-09-24 13:52:52.390674] |==============================================================================|
+[2024-09-24 13:52:52.390877] |=========                      OpenRAM v1.2.48                       =========|
+[2024-09-24 13:52:52.390981] |=========                                                            =========|
+[2024-09-24 13:52:52.391070] |=========               VLSI Design and Automation Lab               =========|
+[2024-09-24 13:52:52.391158] |=========        Computer Science and Engineering Department         =========|
+[2024-09-24 13:52:52.391251] |=========            University of California Santa Cruz             =========|
+[2024-09-24 13:52:52.391327] |=========                                                            =========|
+[2024-09-24 13:52:52.391428] |=========          Usage help: openram-user-group@ucsc.edu           =========|
+[2024-09-24 13:52:52.391503] |=========        Development help: openram-dev-group@ucsc.edu        =========|
+[2024-09-24 13:52:52.391579] |=========                See LICENSE for license info                =========|
+[2024-09-24 13:52:52.391655] |==============================================================================|
+[2024-09-24 13:52:52.391747] ** Start: 09/24/2024 13:52:52
+[2024-09-24 13:52:52.391836] Output files are: 
+[2024-09-24 13:52:52.391919] /home/lroot/labs/ROM/rom_high.sp
+[2024-09-24 13:52:52.392000] /home/lroot/labs/ROM/rom_high.v
+[2024-09-24 13:52:52.392142] /home/lroot/labs/ROM/rom_high.lef
+[2024-09-24 13:52:52.392250] /home/lroot/labs/ROM/rom_high.gds
+[2024-09-24 13:52:52.393857] create rom of word size 2 with 256 num of words
+[2024-09-24 13:52:58.944527] ** Submodules: 6.5 seconds
+[2024-09-24 13:52:58.945363] ** Placement: 0.0 seconds
+[2024-09-24 13:53:22.436874] ** Routing: 23.5 seconds
+[2024-09-24 13:56:23.873040] ** Verification: 181.4 seconds
+[2024-09-24 13:56:23.873488] ** ROM creation: 211.5 seconds
+[2024-09-24 13:56:23.873836] SP: Writing to /home/lroot/labs/ROM/rom_high.sp
+[2024-09-24 13:56:23.960625] ** Spice writing: 0.1 seconds
+[2024-09-24 13:56:23.960780] GDS: Writing to /home/lroot/labs/ROM/rom_high.gds
+[2024-09-24 13:56:24.073116] ** GDS: 0.1 seconds
+[2024-09-24 13:56:24.073266] LEF: Writing to /home/lroot/labs/ROM/rom_high.lef
+[2024-09-24 13:56:24.074872] ** LEF: 0.0 seconds
+[2024-09-24 13:56:24.074971] LVS: Writing to /home/lroot/labs/ROM/rom_high.lvs.sp
+[2024-09-24 13:56:24.148946] ** LVS writing: 0.1 seconds
+[2024-09-24 13:56:24.151984] Config: Writing to /home/lroot/labs/ROM/rom_high.py
+[2024-09-24 13:56:24.152166] ** Config: 0.0 seconds
+[2024-09-24 13:56:24.152280] Verilog: Writing to /home/lroot/labs/ROM/rom_high.v
+[2024-09-24 13:56:24.152996] ** Verilog: 0.0 seconds
+[2024-09-24 13:56:24.159173] ** End: 211.8 seconds

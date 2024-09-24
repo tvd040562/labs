@@ -1,4 +1,3 @@
-`define USE_POWER_PINS
 module rom_high(
 `ifdef USE_POWER_PINS
     vccd1,
