@@ -1,4 +1,3 @@
-`define USE_RAM
 module counter (
 	input clk,
 	input reset,
@@ -12,37 +11,23 @@ module counter (
 	output [31:0] sine_out
 );
 
-`ifndef USE_RAM
-	reg [31:0] table_ [0:255];
-	`include "table.vh"
-	assign sine_out = table_[cout];
-`else
-	reg [15:0] temp_sine_out_H;
-	reg [15:0] temp_sine_out_L;
+	reg [31:0] temp_sine_out;
 	reg [31:0] reg_sine_out;
 	assign sine_out = reg_sine_out;
 
-	rom_high u_mem_H (
+	cust_rom u_mem (
 		.clk0(clk),
 		.cs0(1'b1),
 		.addr0(cout),
-		.dout0(temp_sine_out_H)
-	);
-
-	rom_low u_mem_L (
-		.clk0(clk),
-		.cs0(1'b1),
-		.addr0(cout),
-		.dout0(temp_sine_out_L)
+		.dout0(temp_sine_out)
 	);
 
 	always @(posedge clk or posedge reset) begin
 		if (reset)
 			reg_sine_out = 0;
 		else 
-			reg_sine_out = {temp_sine_out_H,temp_sine_out_L};
+			reg_sine_out = temp_sine_out;
 	end
-`endif
 
 	always @(posedge clk or posedge reset) begin
 		if (reset)

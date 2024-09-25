@@ -1,5 +1,4 @@
 +timescale+1ns/100ps
-rom_high.v
-rom_low.v
+cust_rom.v
 counter.v
 tb.v

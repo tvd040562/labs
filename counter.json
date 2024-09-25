@@ -1,0 +1,38 @@
+{
+	"DESIGN_NAME": "counter",
+	"VERILOG_FILES": ["dir::cust_rom.v", "dir::counter.v"],
+	"CLOCK_PORT": "clk",
+	"CLOCK_PERIOD": 12.0,
+	"//FALLBACK_SDC_FILE": "dir::counter.sdc",
+	"MACROS": {
+  		"cust_rom": {
+      			"instances": {
+          			"u_mem": {
+              				"location": [
+                  				50,
+                  				50
+              				],
+              				"orientation": "N"
+          			}
+      			},
+      			"lib": {
+          			"*": ["dir::./crom/lib/nom_tt_025C_1v80/cust_rom__nom_tt_025C_1v80.lib"]
+			},
+      			"gds": [
+          			"dir::./crom/gds/cust_rom.gds"
+      			],
+      			"lef": [
+          			"dir::./crom/lef/cust_rom.lef"
+      			]
+  		}
+	},
+	"VDD_NETS": "vccd1",
+	"GND_NETS": "vssd1",
+	"PDN_MACRO_CONNECTIONS": ["u_mem vccd1 vssd1 vccd1 vssd1"],
+	"//MAGIC_CAPTURE_ERRORS": false,
+	"//RUN_KLAYOUT_DRC": false,
+	"//MAGIC_DRC_USE_GDS": false,
+	"//RUN_KLAYOUT_XOR": false,
+	"//RUN_MAGIC_DRC": false,
+	"FP_CORE_UTIL": 50
+}

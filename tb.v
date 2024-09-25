@@ -10,26 +10,6 @@ module tb (
 	wire [7:0] cout;
 	wire clk_delay;
 	
-	reg [31:0] table_;
-
-	reg [15:0] word_L;
-	reg [15:0] word_H;
-
-	`ifdef ROMGEN
-	initial begin
-		int fileID_L = $fopen("sineL.bin", "wb");
-		int fileID_H = $fopen("sineH.bin", "wb");
-		for (integer i=0; i<256; i=i+1) begin
-		        table_ = $sin(i*$acos(-1)/128.0) * (2**31-1);
-			{word_H,word_L} = table_;
-			$fwrite(fileID_L, "%c%c", word_L[15:8], word_L[7:0]);
-			$fwrite(fileID_H, "%c%c", word_H[15:8], word_H[7:0]);
-		end
-		$fclose(fileID_L);
-		$fclose(fileID_H);
-	end
-	`endif
-
 	assign #(`CLK_DELAY) clk_delay = clk;
 
 	initial begin
@@ -69,11 +49,8 @@ module tb (
 		.preload(preload),
 		.pl_data(pl_data),
 		.incr(incr),
-		//.table_(table_),
 		.cout(cout)
 	);
-
-	//initial $display("Hello world\n");
 
 	initial begin
 		$dumpfile("counter.vcd");
