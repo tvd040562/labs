@@ -34,9 +34,7 @@ module rom_low(
   reg [DATA_WIDTH-1:0]    mem [0:ROM_DEPTH-1];
 
   initial begin
-    int FILE_ID_L = $fopen("sineL.bin", "rb");
-    $fread(mem, FILE_ID_L);
-    $fclose(FILE_ID_L);
+    $readmemb("sineL.bin",mem,0,ROM_DEPTH-1);
   end
 
   reg  cs0_reg;

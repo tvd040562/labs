@@ -20,10 +20,10 @@ gds flatglob sky130_fd_bd_sram__sram_sp_wlstrap_ce
 gds flatglob sky130_fd_bd_sram__sram_sp_wlstrap_p_ce
 gds flatten true
 gds ordering true
-gds read rom_high.gds
-puts "Finished reading gds rom_high.gds"
-load rom_high
-puts "Finished loading cell rom_high"
+gds read rom_low.gds
+puts "Finished reading gds rom_low.gds"
+load rom_low
+puts "Finished loading cell rom_low"
 cellname delete \(UNNAMED\)
 writeall force
 port makeall
@@ -43,7 +43,7 @@ ext2spice blackbox on
 ext2spice subcircuit top on
 ext2spice global off
 ext2spice format ngspice
-ext2spice rom_high
+ext2spice rom_low
 select top cell
 feedback why
 puts "Finished ext2spice"

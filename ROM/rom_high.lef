@@ -197,13 +197,13 @@ MACRO rom_high
       SHAPE ABUTMENT ; 
       PORT
          LAYER met3 ;
+         RECT  -7.48 -7.48 110.39 -5.74 ;
+         LAYER met3 ;
          RECT  -7.48 117.3 110.39 119.04 ;
          LAYER met4 ;
-         RECT  -7.48 -7.48 -5.74 119.04 ;
-         LAYER met4 ;
          RECT  108.65 -7.48 110.39 119.04 ;
-         LAYER met3 ;
-         RECT  -7.48 -7.48 110.39 -5.74 ;
+         LAYER met4 ;
+         RECT  -7.48 -7.48 -5.74 119.04 ;
       END
    END vccd1
    PIN vssd1

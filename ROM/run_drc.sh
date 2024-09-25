@@ -30,8 +30,8 @@ cp /opt/OpenRAM/technology/sky130/maglef_lib/sky130_fd_bd_sram__sram_sp_wlstrap_
 echo "$(date): Starting DRC using Magic /opt/OpenRAM/miniconda/bin/magic"
 
 /opt/OpenRAM/miniconda/bin/magic -dnull -noconsole << EOF
-load rom_high -dereference
-puts "Finished loading cell rom_high"
+load rom_low -dereference
+puts "Finished loading cell rom_low"
 cellname delete \(UNNAMED\)
 select top cell
 expand

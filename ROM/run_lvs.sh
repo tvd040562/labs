@@ -2,7 +2,7 @@
 export OPENRAM_TECH="/opt/OpenRAM/technology:/opt/OpenRAM/compiler/../technology"
 echo "$(date): Starting LVS using Netgen /opt/OpenRAM/miniconda/bin/netgen"
 /opt/OpenRAM/miniconda/bin/netgen -noconsole << EOF
-lvs {rom_high.spice rom_high} {rom_high.lvs.sp rom_high} setup.tcl rom_high.lvs.report -full -json
+lvs {rom_low.spice rom_low} {rom_low.lvs.sp rom_low} setup.tcl rom_low.lvs.report -full -json
 quit
 EOF
 magic_retcode=$?
