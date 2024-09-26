@@ -1,6 +1,6 @@
 module counter #(
-	parameter ADDR_WIDTH = 7,
-	parameter DATA_WIDTH = 16
+	parameter ADDR_WIDTH = 8,
+	parameter DATA_WIDTH = 32
 	)
 	(
 	input clk,

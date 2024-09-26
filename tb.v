@@ -4,8 +4,8 @@ module tb (
 	//input clk,
 	//input reset,
 );
-	parameter ADDR_WIDTH = 7;
-	parameter DATA_WIDTH = 16;
+	parameter ADDR_WIDTH = 8;
+	parameter DATA_WIDTH = 32;
 	parameter ROM_DEPTH = 1 << ADDR_WIDTH;
 	reg clk, reset, preload, enable, updn;
 	reg [ADDR_WIDTH-1:0] pl_data;
