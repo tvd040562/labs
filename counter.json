@@ -15,15 +15,15 @@
               				"orientation": "N"
           			}
       			},
-      			"lib": {
-          			"*": ["dir::./crom/lib/nom_tt_025C_1v80/cust_rom__nom_tt_025C_1v80.lib"]
-			},
       			"gds": [
-          			"dir::./crom/gds/cust_rom.gds"
+          			"dir::crom/gds/cust_rom.gds"
       			],
       			"lef": [
-          			"dir::./crom/lef/cust_rom.lef"
-      			]
+          			"dir::crom/lef/cust_rom.lef"
+      			],
+      			"lib": {
+          			"*": ["dir::crom/lib/nom_tt_025C_1v80/cust_rom__nom_tt_025C_1v80.lib"]
+			}
   		}
 	},
 	"VDD_NETS": "vccd1",

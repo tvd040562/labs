@@ -1,4 +1,4 @@
-CONFIG ?= initial.json
+CONFIG ?= initial
 tb.exe: *.v
 	iverilog -D PERIOD=20 -D CLK_DELAY=0.01 -D USE_RAM=1 -g2005-sv -f verilog.f -o tb.exe
 
@@ -13,31 +13,31 @@ debug: counter.vcd
 	gtkwave counter.vcd
 
 synthesis:
-	openlane --dockerized $(CONFIG) --to Yosys.Synthesis
+	openlane --dockerized $(CONFIG).json --to Yosys.Synthesis
 
 floorplan:
-	openlane --dockerized $(CONFIG) --to OpenROAD.Floorplan
+	openlane --dockerized $(CONFIG).json --to OpenROAD.Floorplan
 
 prepnrsta:
-	openlane --dockerized $(CONFIG) --to OpenROAD.STAPrePNR
+	openlane --dockerized $(CONFIG).json --to OpenROAD.STAPrePNR
 
 midpnrsta:
-	openlane --dockerized $(CONFIG) --to OpenROAD.STAMidPNR-3
+	openlane --dockerized $(CONFIG).json --to OpenROAD.STAMidPNR-3
 
 checksta:
-	openlane --dockerized $(CONFIG) --last-run --from OpenROAD.STApostpnr --to OpenROAD.STApostpnr
+	openlane --dockerized $(CONFIG).json --last-run --from OpenROAD.STApostpnr --to OpenROAD.STApostpnr
 
 postpnrsta:
-	openlane --dockerized $(CONFIG) --to OpenROAD.STApostpnr
+	openlane --dockerized $(CONFIG).json --to OpenROAD.STApostpnr
 
 gds:
-	openlane --dockerized $(CONFIG)
+	openlane --dockerized $(CONFIG).json
 
 global_pl:
-	openlane --dockerized $(CONFIG) --to OpenROAD.GlobalPlacementSkipIO
+	openlane --dockerized $(CONFIG).json --to OpenROAD.GlobalPlacementSkipIO
 
 viewlayout:
-	openlane --dockerized $(CONFIG) --last-run --flow openinopenroad
+	openlane --dockerized $(CONFIG).json --last-run --flow openinopenroad
 
 clean:
 	rm -rf tb.exe counter.vcd

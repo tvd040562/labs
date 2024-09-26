@@ -4,13 +4,26 @@ module tb (
 	//input clk,
 	//input reset,
 );
+	parameter ADDR_WIDTH = 7;
+	parameter DATA_WIDTH = 16;
+	parameter ROM_DEPTH = 1 << ADDR_WIDTH;
 	reg clk, reset, preload, enable, updn;
-	reg [7:0] pl_data;
+	reg [ADDR_WIDTH-1:0] pl_data;
 	reg [3:0] incr;
-	wire [7:0] cout;
+	wire [ADDR_WIDTH-1:0] cout;
 	wire clk_delay;
+	reg [DATA_WIDTH-1:0] data;
 	
 	assign #(`CLK_DELAY) clk_delay = clk;
+
+	initial begin
+		static integer FILE_ID = $fopen("table.vh", "w");
+		for (integer i=0; i<ROM_DEPTH; i=i+1) begin
+			data = $sin($acos(-1)*i/(ROM_DEPTH*0.5)) * (2**(DATA_WIDTH-2));
+			$fwrite(FILE_ID,"assign table_[%0d] = %0d'h%H;\n", i, DATA_WIDTH, data);
+		end
+		$fclose(FILE_ID);
+	end
 
 	initial begin
 		clk = 0;

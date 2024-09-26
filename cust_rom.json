@@ -2,9 +2,13 @@
 	"DESIGN_NAME": "cust_rom",
 	"VERILOG_FILES": ["dir::cust_rom.v"],
 	"CLOCK_PORT": "clk0",
-	"CLOCK_PERIOD": 12.0,
+	"CLOCK_PERIOD": 10.0,
 	"MAX_FANOUT_CONSTRAINT": 10,
+	"//FP_PDN_RING": true,
+	"//RT_MAX_LAYER": "met4",
 	"//FALLBACK_SDC_FILE": "dir::cust_rom.sdc",
 	"FP_PDN_MULTILAYER": false,
+	"//VDD_NETS": ["vccd1"],
+	"//GND_NETS": ["vssd1"],
 	"FP_CORE_UTIL": 40
 }
