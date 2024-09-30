@@ -1,5 +1,5 @@
 module counter #(
-	parameter ADDR_WIDTH = 8,
+	parameter ADDR_WIDTH = 9,
 	parameter DATA_WIDTH = 32
 	)
 	(
@@ -15,33 +15,47 @@ module counter #(
 	output [DATA_WIDTH-1:0] sine_out
 );
 
-	reg [DATA_WIDTH-1:0] temp_sine_out;
+	reg [DATA_WIDTH-1:0] temp_sine_out[0:1];
 	reg [DATA_WIDTH-1:0] reg_sine_out;
+	reg sel0;
 	assign sine_out = reg_sine_out;
 
-	cust_rom u_mem (
+	cust_rom0 u_mem0 (
 		.clk0(clk),
 		.cs0(1'b1),
-		.addr0(cout),
-		.dout0(temp_sine_out)
+		.addr0(cout[ADDR_WIDTH-2:0]),
+		.dout0(temp_sine_out[0])
 	);
 
-	always @(posedge clk or posedge reset) begin
-		if (reset)
-			reg_sine_out = 0;
-		else 
-			reg_sine_out = temp_sine_out;
+	cust_rom1 u_mem1 (
+		.clk0(clk),
+		.cs0(1'b1),
+		.addr0(cout[ADDR_WIDTH-2:0]),
+		.dout0(temp_sine_out[1])
+	);
+
+	always @(posedge clk) begin
+		sel0 <= ~cout[ADDR_WIDTH-1];
 	end
 
 	always @(posedge clk or posedge reset) begin
 		if (reset)
-			cout = 0;
+			reg_sine_out <= 0;
+		else if (sel0)
+			reg_sine_out <= temp_sine_out[0];
+		else
+			reg_sine_out <= temp_sine_out[1];
+	end
+
+	always @(posedge clk or posedge reset) begin
+		if (reset)
+			cout <= 0;
 		else if (preload)
-			cout = pl_data;
+			cout <= pl_data;
 		else if (enable)
 			if (updn)
-				cout = cout + incr;
+				cout <= cout + incr;
 			else
-				cout = cout - incr;
+				cout <= cout - incr;
 	end
 endmodule

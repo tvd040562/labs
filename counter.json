@@ -2,37 +2,57 @@
 	"DESIGN_NAME": "counter",
 	"VERILOG_FILES": ["dir::cust_rom.v", "dir::counter.v"],
 	"CLOCK_PORT": "clk",
-	"CLOCK_PERIOD": 12.0,
+	"CLOCK_PERIOD": 15.0,
+	"FP_SIZING": "absolute",
+	"DIE_AREA": "0 0 500 250",
 	"//FALLBACK_SDC_FILE": "dir::counter.sdc",
+	"FP_PDN_MULTILAYER": true,
 	"MACROS": {
-  		"cust_rom": {
+  		"cust_rom0": {
       			"instances": {
-          			"u_mem": {
+          			"u_mem0": {
               				"location": [
-                  				50,
-                  				50
+                  				35,
+                  				35	
               				],
               				"orientation": "N"
           			}
       			},
       			"gds": [
-          			"dir::crom/gds/cust_rom.gds"
+          			"dir::crom0/gds/cust_rom0.gds"
       			],
       			"lef": [
-          			"dir::crom/lef/cust_rom.lef"
+          			"dir::crom0/lef/cust_rom0.lef"
       			],
       			"lib": {
-          			"*": ["dir::crom/lib/nom_tt_025C_1v80/cust_rom__nom_tt_025C_1v80.lib"]
+          			"*": ["dir::crom0/lib/nom_tt_025C_1v80/cust_rom0__nom_tt_025C_1v80.lib"]
+			}
+  		},
+  		"cust_rom1": {
+      			"instances": {
+          			"u_mem1": {
+              				"location": [
+                  				300,
+                  				35	
+              				],
+              				"orientation": "N"
+          			}
+      			},
+      			"gds": [
+          			"dir::crom1/gds/cust_rom1.gds"
+      			],
+      			"lef": [
+          			"dir::crom1/lef/cust_rom1.lef"
+      			],
+      			"lib": {
+          			"*": ["dir::crom1/lib/nom_tt_025C_1v80/cust_rom1__nom_tt_025C_1v80.lib"]
 			}
   		}
 	},
 	"VDD_NETS": "vccd1",
 	"GND_NETS": "vssd1",
-	"PDN_MACRO_CONNECTIONS": ["u_mem vccd1 vssd1 vccd1 vssd1"],
-	"//MAGIC_CAPTURE_ERRORS": false,
-	"//RUN_KLAYOUT_DRC": false,
-	"//MAGIC_DRC_USE_GDS": false,
-	"//RUN_KLAYOUT_XOR": false,
-	"//RUN_MAGIC_DRC": false,
-	"FP_CORE_UTIL": 50
+	"VERILOG_POWER_DEFINE": "USE_POWER_PINS",
+	"ERROR_ON_PDN_VIOLATIONS": false,
+	"PDN_MACRO_CONNECTIONS": ["u_mem.* vccd1 vssd1 vccd1 vssd1"],
+	"FP_CORE_UTIL": 60
 }
