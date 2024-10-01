@@ -4,7 +4,7 @@ module tb (
 	//input clk,
 	//input reset,
 );
-	parameter ADDR_WIDTH = 9;
+	parameter ADDR_WIDTH = 10;
 	parameter DATA_WIDTH = 32;
 	parameter ROM_DEPTH = 1 << ADDR_WIDTH;
 	reg clk, reset, preload, enable, updn;
@@ -15,31 +15,41 @@ module tb (
 	reg [DATA_WIDTH-1:0] data;
 	
 	assign #(`CLK_DELAY) clk_delay = clk;
-	integer i, j;
-	integer FILE_ID0, FILE_ID1;
+	reg [ADDR_WIDTH:0] i;
+	integer j, m, n;
+	integer FILE_ID0, FILE_ID1, FILE_ID2, FILE_ID3;
 
 	`ifdef TABLEGEN
 	initial begin
+		j = 0;
+		m = 0;
+		n = 0;
 		FILE_ID0 = $fopen("table0.vh", "w");
+		FILE_ID1 = $fopen("table1.vh", "w");
+		FILE_ID2 = $fopen("table2.vh", "w");
+		FILE_ID3 = $fopen("table3.vh", "w");
 		for (i=0; i<ROM_DEPTH; i=i+1) begin
-			data = $sin($acos(-1)*i/(ROM_DEPTH*0.5)) * (2**(DATA_WIDTH-2));
-			if (i<ROM_DEPTH/2)
-				$fwrite(FILE_ID0,"assign table0[%0d] = %0d'h%H;\n", i, DATA_WIDTH, data);
+			data = $sin($acos(-1)*i/(ROM_DEPTH*0.5)) * (2**(DATA_WIDTH-1)-1);
+			case (i[ADDR_WIDTH-1:ADDR_WIDTH-2])
+				2'b00: $fwrite(FILE_ID0,"assign table0[%0d] = %0d'h%H;\n", i, DATA_WIDTH, data);
+				2'b01: begin
+					$fwrite(FILE_ID1,"assign table1[%0d] = %0d'h%H;\n", j, DATA_WIDTH, data);
+					j = j+1;
+					end
+				2'b10: begin
+					$fwrite(FILE_ID2,"assign table2[%0d] = %0d'h%H;\n", m, DATA_WIDTH, data);
+					m = m+1;
+					end
+				default: begin
+					$fwrite(FILE_ID3,"assign table3[%0d] = %0d'h%H;\n", n, DATA_WIDTH, data);
+					n = n+1;
+					end
+			endcase
 		end
 		$fclose(FILE_ID0);
-	end
-
-	initial begin
-		j = 0;
-		FILE_ID1 = $fopen("table1.vh", "w");
-		for (i=0; i<ROM_DEPTH; i=i+1) begin
-			data = $sin($acos(-1)*i/(ROM_DEPTH*0.5)) * (2**(DATA_WIDTH-2));
-			if (i>=ROM_DEPTH/2) begin
-				$fwrite(FILE_ID1,"assign table1[%0d] = %0d'h%H;\n", j, DATA_WIDTH, data);
-				j = j+1;
-			end
-		end
 		$fclose(FILE_ID1);
+		$fclose(FILE_ID2);
+		$fclose(FILE_ID3);
 	end
 	`endif
 

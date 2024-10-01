@@ -1,5 +1,5 @@
 module counter #(
-	parameter ADDR_WIDTH = 9,
+	parameter ADDR_WIDTH = 10,
 	parameter DATA_WIDTH = 32
 	)
 	(
@@ -15,36 +15,50 @@ module counter #(
 	output [DATA_WIDTH-1:0] sine_out
 );
 
-	reg [DATA_WIDTH-1:0] temp_sine_out[0:1];
+	reg [DATA_WIDTH-1:0] temp_sine_out[0:3];
 	reg [DATA_WIDTH-1:0] reg_sine_out;
-	reg sel0;
+	reg [1:0] sel;
+	reg [1:0] sel_reg;
 	assign sine_out = reg_sine_out;
 
 	cust_rom0 u_mem0 (
 		.clk0(clk),
 		.cs0(1'b1),
-		.addr0(cout[ADDR_WIDTH-2:0]),
+		.addr0(cout[ADDR_WIDTH-3:0]),
 		.dout0(temp_sine_out[0])
 	);
 
 	cust_rom1 u_mem1 (
 		.clk0(clk),
 		.cs0(1'b1),
-		.addr0(cout[ADDR_WIDTH-2:0]),
+		.addr0(cout[ADDR_WIDTH-3:0]),
 		.dout0(temp_sine_out[1])
 	);
 
+	cust_rom2 u_mem2 (
+		.clk0(clk),
+		.cs0(1'b1),
+		.addr0(cout[ADDR_WIDTH-3:0]),
+		.dout0(temp_sine_out[2])
+	);
+
+	cust_rom3 u_mem3 (
+		.clk0(clk),
+		.cs0(1'b1),
+		.addr0(cout[ADDR_WIDTH-3:0]),
+		.dout0(temp_sine_out[3])
+	);
+
 	always @(posedge clk) begin
-		sel0 <= ~cout[ADDR_WIDTH-1];
+		sel <= cout[ADDR_WIDTH-1:ADDR_WIDTH-2];
+		sel_reg <= sel;
 	end
 
 	always @(posedge clk or posedge reset) begin
 		if (reset)
 			reg_sine_out <= 0;
-		else if (sel0)
-			reg_sine_out <= temp_sine_out[0];
-		else
-			reg_sine_out <= temp_sine_out[1];
+		else 
+			reg_sine_out <= temp_sine_out[sel_reg];
 	end
 
 	always @(posedge clk or posedge reset) begin
