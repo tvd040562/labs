@@ -1,11 +1,11 @@
 {
-	"DESIGN_NAME": "cust_rom0",
+	"DESIGN_NAME": "cust_rom1",
 	"VERILOG_FILES": ["dir::cust_rom.v"],
 	"CLOCK_PORT": "clk0",
-	"CLOCK_PERIOD": 10.0,
-	"MAX_FANOUT_CONSTRAINT": 10,
+	"CLOCK_PERIOD": 15.0,
+	"//MAX_FANOUT_CONSTRAINT": 10,
 	"FP_SIZING": "absolute",
-	"DIE_AREA": "0 0 230 210",
+	"DIE_AREA": "0 0 250 250",
 	"//FALLBACK_SDC_FILE": "dir::cust_rom.sdc",
 	"VDD_NETS": "vccd1",
 	"GND_NETS": "vssd1",
@@ -13,6 +13,6 @@
 	"FP_PDN_CORE_RING": false,
 	"//SYNTH_POWER_DEFINE": "USE_POWER_PINS",
 	"//FP_PDN_CHECK_NODES": false,
-	"//RT_MAX_LAYER": "met4",
+	"RT_MAX_LAYER": "met4",
 	"FP_CORE_UTIL": 40
 }
