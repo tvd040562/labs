@@ -28,6 +28,9 @@ postpnrsta:
 global_pl:
 	openlane --dockerized initial.json --to OpenROAD.GlobalPlacementSkipIO
 
+continue:
+	openlane --dockerized initial.json --last-run --from OpenROAD.STApostpnr
+
 gds:
 	openlane --dockerized initial.json
 

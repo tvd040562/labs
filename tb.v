@@ -21,14 +21,14 @@ module tb (
 	*/
 
 `ifdef USE_RAM
-	reg [3:0] csb00;
-	reg [3:0] csb10;
-        reg [3:0] csb20;
-        reg [3:0] csb30;
-        reg [3:0] csb40;
-        reg [3:0] csb50;
-        reg [3:0] csb60;
-        reg [3:0] csb70;
+	reg  csb00;
+	reg  csb10;
+        reg  csb20;
+        reg  csb30;
+        reg  csb40;
+        reg  csb50;
+        reg  csb60;
+        reg  csb70;
        	reg web0;
 	reg [3:0] wmask0;
 	reg [7:0] addr0;
@@ -43,14 +43,14 @@ module tb (
 			din0 = value;
 			//$display("i: %3d; value: %32h", i, value);
 			case (i[7:5])
-				3'b000: csb00 = 4'h0;
-				3'b001: csb10 = 4'h0;
-				3'b010: csb20 = 4'h0;
-				3'b011: csb30 = 4'h0;
-				3'b100: csb40 = 4'h0;
-				3'b101: csb50 = 4'h0;
-				3'b110: csb60 = 4'h0;
-				default: csb70 = 4'h0;
+				3'b000: csb00 = 0;
+				3'b001: csb10 = 0;
+				3'b010: csb20 = 0;
+				3'b011: csb30 = 0;
+				3'b100: csb40 = 0;
+				3'b101: csb50 = 0;
+				3'b110: csb60 = 0;
+				default: csb70 = 0;
 			endcase
 			waitforclk(1);
 			csb00 = 4'hf;

@@ -9,14 +9,14 @@ module counter (
 	input [7:0] pl_data,
 	input [3:0] incr,
 `ifdef USE_RAM
-	input [3:0] csb00,
-	input [3:0] csb10,
-	input [3:0] csb20,
-	input [3:0] csb30,
-	input [3:0] csb40,
-	input [3:0] csb50,
-	input [3:0] csb60,
-	input [3:0] csb70,
+	input  csb00,
+	input  csb10,
+	input  csb20,
+	input  csb30,
+	input  csb40,
+	input  csb50,
+	input  csb60,
+	input  csb70,
 	input web0,
 	input [3:0] wmask0,
 	input [7:0] addr0,
@@ -42,14 +42,14 @@ module counter (
 	wire [7:0] din08[0:3];
 	
 	assign sine_out = reg_sine_out;
-	assign csb0[0] = csb00;
-	assign csb0[1] = csb10;
-	assign csb0[2] = csb20;
-	assign csb0[3] = csb30;
-	assign csb0[4] = csb40;
-	assign csb0[5] = csb50;
-	assign csb0[6] = csb60;
-	assign csb0[7] = csb70;
+	assign csb0[0] = {csb00,csb00,csb00,csb00};
+	assign csb0[1] = {csb10,csb10,csb10,csb10};
+	assign csb0[2] = {csb20,csb20,csb20,csb20};
+	assign csb0[3] = {csb30,csb30,csb30,csb30};
+	assign csb0[4] = {csb40,csb40,csb40,csb40};
+	assign csb0[5] = {csb50,csb50,csb50,csb50};
+	assign csb0[6] = {csb60,csb60,csb60,csb60};
+	assign csb0[7] = {csb70,csb70,csb70,csb70};
 	//assign {din08[3],din08[2],din08[1],din08[0]} = din0;
 	assign {din08[3],din08[2],din08[1],din08[0]} = din0;
 
@@ -71,15 +71,15 @@ module counter (
 			.dout1(temp_sine_out[i][j])
 		);
 		always @(posedge clk) begin
-			temp_sine_out_reg[i][j] = temp_sine_out[i][j];
+			temp_sine_out_reg[i][j] <= temp_sine_out[i][j];
 		end
 		end
 		end
 	endgenerate
 
 	always @(posedge clk) begin
-		cout_reg2 = cout_reg;
-		cout_reg =  cout;
+		cout_reg2 <= cout_reg;
+		cout_reg <=  cout;
 	end
 
 	always @(posedge clk or posedge reset) begin
@@ -100,29 +100,15 @@ module counter (
 	end
 `endif
 
-`ifdef SIMULATION
 	always @(posedge clk or posedge reset) begin
 		if (reset)
-			cout = 0;
+			cout <= 0;
 		else if (preload)
-			cout = pl_data;
+			cout <= pl_data;
 		else if (enable)
 			if (updn)
-				#0.1 cout = cout + incr;
+				cout <= cout + incr;
 			else
-				#0.1 cout = cout - incr;
+				cout <= cout - incr;
 	end
-`else
-	always @(posedge clk or posedge reset) begin
-		if (reset)
-			cout = 0;
-		else if (preload)
-			cout = pl_data;
-		else if (enable)
-			if (updn)
-				cout = cout + incr;
-			else
-				cout = cout - incr;
-	end
-`endif
 endmodule
