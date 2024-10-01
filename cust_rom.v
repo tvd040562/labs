@@ -17,7 +17,6 @@ module cust_rom #(
 `ifdef ROMGEN
 	parameter ROM_DEPTH = 1 << ADDR_WIDTH;
 
-	reg [DATA_WIDTH-1:0] table_ [0:ROM_DEPTH-1];
 	`include "table.vh"
 	reg [ADDR_WIDTH-1:0] addr0_reg;
 

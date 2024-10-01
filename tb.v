@@ -16,14 +16,21 @@ module tb (
 	
 	assign #(`CLK_DELAY) clk_delay = clk;
 
+`ifdef TABLEGEN
 	initial begin
 		static integer FILE_ID = $fopen("table.vh", "w");
+		$fwrite(FILE_ID,"logic [0:ROM_DEPTH-1] [DATA_WIDTH-1:0] table_ = {\n");
 		for (integer i=0; i<ROM_DEPTH; i=i+1) begin
 			data = $sin($acos(-1)*i/(ROM_DEPTH*0.5)) * (2**(DATA_WIDTH-2));
-			$fwrite(FILE_ID,"assign table_[%0d] = %0d'h%H;\n", i, DATA_WIDTH, data);
+			if (i<ROM_DEPTH-1)
+				$fwrite(FILE_ID,"%0d'h%H,\n", DATA_WIDTH, data);
+			else
+				$fwrite(FILE_ID,"%0d'h%H\n", DATA_WIDTH, data);
 		end
+		$fwrite(FILE_ID,"};\n");
 		$fclose(FILE_ID);
 	end
+`endif
 
 	initial begin
 		clk = 0;

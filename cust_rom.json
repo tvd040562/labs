@@ -1,6 +1,8 @@
 {
 	"DESIGN_NAME": "cust_rom",
 	"VERILOG_FILES": ["dir::cust_rom.v"],
+	"USE_SYNLIG": true,
+	"VERILOG_DEFINES": ["ROMGEN"],
 	"CLOCK_PORT": "clk0",
 	"CLOCK_PERIOD": 12.0,
 	"MAX_FANOUT_CONSTRAINT": 10,
