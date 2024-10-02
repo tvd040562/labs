@@ -1,7 +1,7 @@
 //`define ROMGEN
 //`define USE_POWER_PINS
 module cust_rom #(
-	parameter ADDR_WIDTH = 8,
+	parameter ADDR_WIDTH = 10,
 	parameter DATA_WIDTH = 32
 	)
 	(

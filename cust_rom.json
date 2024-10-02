@@ -4,9 +4,12 @@
 	"USE_SYNLIG": true,
 	"VERILOG_DEFINES": ["ROMGEN"],
 	"CLOCK_PORT": "clk0",
-	"CLOCK_PERIOD": 12.0,
-	"MAX_FANOUT_CONSTRAINT": 10,
+	"CLOCK_PERIOD": 15.0,
+	"MAX_FANOUT_CONSTRAINT": 6,
+	"FP_SIZING": "absolute",
+	"DIE_AREA": [0, 0, 350, 350],
 	"//FALLBACK_SDC_FILE": "dir::cust_rom.sdc",
 	"FP_PDN_MULTILAYER": false,
-	"FP_CORE_UTIL": 40
+	"RT_MAX_LAYER": "met4",
+	"FP_CORE_UTIL": 60
 }

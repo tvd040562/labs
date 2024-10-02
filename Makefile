@@ -1,4 +1,7 @@
 CONFIG ?= initial
+FROM ?= Yosys.Synthesis
+TO ?= Misc.ReportManufacturability
+
 tb.exe: *.v
 	iverilog -D PERIOD=20 -D CLK_DELAY=0.01 -D USE_RAM=1 -D ROMGEN=1 -g2005-sv -f verilog.f -o tb.exe
 
@@ -23,6 +26,9 @@ prepnrsta:
 
 midpnrsta:
 	openlane --dockerized $(CONFIG).json --to OpenROAD.STAMidPNR-3
+
+continue:
+	openlane --dockerized $(CONFIG).json --last-run --from $(FROM) --to $(TO)
 
 checksta:
 	openlane --dockerized $(CONFIG).json --last-run --from OpenROAD.STApostpnr --to OpenROAD.STApostpnr
