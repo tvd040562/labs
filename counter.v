@@ -17,7 +17,7 @@ module counter #(
 
 	reg [DATA_WIDTH-1:0] temp_sine_out;
 	reg [DATA_WIDTH-1:0] reg_sine_out;
-	assign sine_out = reg_sine_out;
+	assign sine_out = temp_sine_out;
 
 	cust_rom u_mem (
 		.clk0(clk),
@@ -25,14 +25,14 @@ module counter #(
 		.addr0(cout),
 		.dout0(temp_sine_out)
 	);
-
+/*
 	always @(posedge clk or posedge reset) begin
 		if (reset)
 			reg_sine_out = 0;
 		else 
 			reg_sine_out = temp_sine_out;
 	end
-
+*/
 	always @(posedge clk or posedge reset) begin
 		if (reset)
 			cout = 0;
