@@ -1,5 +1,5 @@
 module counter #(
-	parameter ADDR_WIDTH = 10,
+	parameter ADDR_WIDTH = `AW,
 	parameter DATA_WIDTH = 32
 	)
 	(

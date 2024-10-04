@@ -4,7 +4,7 @@ module tb (
 	//input clk,
 	//input reset,
 );
-	parameter ADDR_WIDTH = 10;
+	parameter ADDR_WIDTH = `AW;
 	parameter DATA_WIDTH = 32;
 	parameter ROM_DEPTH = 1 << ADDR_WIDTH;
 	reg clk, reset, preload, enable, updn;
@@ -17,18 +17,33 @@ module tb (
 	assign #(`CLK_DELAY) clk_delay = clk;
 
 `ifdef TABLEGEN
+	integer j, FILE_ID1, FILE_ID2;
 	initial begin
-		static integer FILE_ID = $fopen("table.vh", "w");
-		$fwrite(FILE_ID,"logic [0:ROM_DEPTH-1] [DATA_WIDTH-1:0] table_ = {\n");
+		j = 0;
+		FILE_ID1 = $fopen("table1.vh", "w");
+		FILE_ID2 = $fopen("table2.vh", "w");
+		$fwrite(FILE_ID1,"logic [0:(ROM_DEPTH/2)-1] [DATA_WIDTH-1:0] table1 = {\n");
+		$fwrite(FILE_ID2,"logic [0:(ROM_DEPTH/2)-1] [DATA_WIDTH-1:0] table2 = {\n");
 		for (integer i=0; i<ROM_DEPTH; i=i+1) begin
 			data = $sin($acos(-1)*i/(ROM_DEPTH*0.5)) * (2**(DATA_WIDTH-2));
-			if (i<ROM_DEPTH-1)
-				$fwrite(FILE_ID,"%0d'h%H,\n", DATA_WIDTH, data);
-			else
-				$fwrite(FILE_ID,"%0d'h%H\n", DATA_WIDTH, data);
+			if (i<(ROM_DEPTH/2))
+				if (i<(ROM_DEPTH/2)-1)
+					$fwrite(FILE_ID1,"%0d'h%H,\n", DATA_WIDTH, data);
+				else
+					$fwrite(FILE_ID1,"%0d'h%H\n", DATA_WIDTH, data);
+			else begin
+				if (j<(ROM_DEPTH/2)-1)
+					$fwrite(FILE_ID2,"%0d'h%H,\n", DATA_WIDTH, data);
+				else
+					$fwrite(FILE_ID2,"%0d'h%H\n", DATA_WIDTH, data);
+				j = j+1;
+			end
+
 		end
-		$fwrite(FILE_ID,"};\n");
-		$fclose(FILE_ID);
+		$fwrite(FILE_ID1,"};\n");
+		$fclose(FILE_ID1);
+		$fwrite(FILE_ID2,"};\n");
+		$fclose(FILE_ID2);
 	end
 `endif
 
@@ -93,17 +108,17 @@ module tb (
 		incr = 1;
 		waitforclk(100);
 		//updn = 0;
-		waitforclk(1000);
+		waitforclk(2000);
 		incr = 2;
-		waitforclk(1000);
+		waitforclk(2000);
 		incr = 3;
-		waitforclk(1000);
+		waitforclk(2000);
 		incr = 4;
-		waitforclk(1000);
+		waitforclk(2000);
 		incr = 5;
-		waitforclk(1000);
+		waitforclk(2000);
 		incr = 6;
-		waitforclk(1000);
+		waitforclk(2000);
 		$finish();
 	end
 endmodule
