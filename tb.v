@@ -36,14 +36,14 @@ module tb (
 		FILE_ID6 = $fopen("table6.vh", "w");
 		FILE_ID7 = $fopen("table7.vh", "w");
 		FILE_ID8 = $fopen("table8.vh", "w");
-		$fwrite(FILE_ID1,"logic [0:(ROM_DEPTH/8)-1] [DATA_WIDTH-1:0] table1 = {\n");
-		$fwrite(FILE_ID2,"logic [0:(ROM_DEPTH/8)-1] [DATA_WIDTH-1:0] table2 = {\n");
-		$fwrite(FILE_ID3,"logic [0:(ROM_DEPTH/8)-1] [DATA_WIDTH-1:0] table3 = {\n");
-		$fwrite(FILE_ID4,"logic [0:(ROM_DEPTH/8)-1] [DATA_WIDTH-1:0] table4 = {\n");
-		$fwrite(FILE_ID5,"logic [0:(ROM_DEPTH/8)-1] [DATA_WIDTH-1:0] table5 = {\n");
-		$fwrite(FILE_ID6,"logic [0:(ROM_DEPTH/8)-1] [DATA_WIDTH-1:0] table6 = {\n");
-		$fwrite(FILE_ID7,"logic [0:(ROM_DEPTH/8)-1] [DATA_WIDTH-1:0] table7 = {\n");
-		$fwrite(FILE_ID8,"logic [0:(ROM_DEPTH/8)-1] [DATA_WIDTH-1:0] table8 = {\n");
+		$fwrite(FILE_ID1,"logic [0:ROM_DEPTH-1] [DATA_WIDTH-1:0] table_ = {\n");
+		$fwrite(FILE_ID2,"logic [0:ROM_DEPTH-1] [DATA_WIDTH-1:0] table_ = {\n");
+		$fwrite(FILE_ID3,"logic [0:ROM_DEPTH-1] [DATA_WIDTH-1:0] table_ = {\n");
+		$fwrite(FILE_ID4,"logic [0:ROM_DEPTH-1] [DATA_WIDTH-1:0] table_ = {\n");
+		$fwrite(FILE_ID5,"logic [0:ROM_DEPTH-1] [DATA_WIDTH-1:0] table_ = {\n");
+		$fwrite(FILE_ID6,"logic [0:ROM_DEPTH-1] [DATA_WIDTH-1:0] table_ = {\n");
+		$fwrite(FILE_ID7,"logic [0:ROM_DEPTH-1] [DATA_WIDTH-1:0] table_ = {\n");
+		$fwrite(FILE_ID8,"logic [0:ROM_DEPTH-1] [DATA_WIDTH-1:0] table_ = {\n");
 		for (i0=0; i0<ROM_DEPTH; i0=i0+1) begin
 			data = $sin($acos(-1)*i0/(ROM_DEPTH*0.5)) * (2**(DATA_WIDTH-2));
 			if (i0<(ROM_DEPTH/8))
@@ -143,7 +143,7 @@ module tb (
 	end
 	endtask
 
-	counter dut (
+	counter #(.ADDR_WIDTH(ADDR_WIDTH)) dut (
 		.clk(clk),
 		.reset(reset),
 		.enable(enable),
@@ -175,17 +175,17 @@ module tb (
 		incr = 1;
 		waitforclk(100);
 		//updn = 0;
-		waitforclk(2000);
+		waitforclk(10000);
 		incr = 2;
-		waitforclk(2000);
+		waitforclk(10000);
 		incr = 3;
-		waitforclk(2000);
+		waitforclk(10000);
 		incr = 4;
-		waitforclk(2000);
+		waitforclk(10000);
 		incr = 5;
-		waitforclk(2000);
+		waitforclk(10000);
 		incr = 6;
-		waitforclk(2000);
+		waitforclk(10000);
 		$finish();
 	end
 endmodule

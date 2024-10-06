@@ -19,7 +19,8 @@ module counter #(
 	reg [DATA_WIDTH-1:0] reg_sine_out;
 	assign sine_out = temp_sine_out;
 
-	cust_rom u_mem (
+	cust_rom u_mem
+	(
 		.clk0(clk),
 		.cs0(1'b1),
 		.addr0(cout),

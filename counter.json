@@ -3,39 +3,155 @@
 	"VERILOG_FILES": ["dir::cust_rom.v", "dir::counter.v"],
 	"CLOCK_PORT": "clk",
 	"CLOCK_PERIOD": 14.0,
-	"VERILOG_DEFINES": ["AW=11"],
+	"VERILOG_DEFINES": ["AW=12"],
 	"FP_SIZING": "absolute",
-	"DIE_AREA": [0, 0, 750, 650],
+	"DIE_AREA": [0, 0, 635, 1235],
 	"FALLBACK_SDC_FILE": "dir::counter.sdc",
 	"MAX_FANOUT_CONSTRAINT": 4,
 	"MAX_TRANSITION_CONSTRAINT": 0.4,
 	"RUN_POST_GRT_RESIZER_TIMING": true,
 	"RUN_POST_CTS_RESIZER_TIMING": true,
 	"MACROS": {
-  		"cust_rom": {
+  		"rom1": {
       			"instances": {
-          			"u_mem": {
-              				"location": [
-                  				50,
-                  				50
-              				],
+          			"u_mem.u_rom1": {
+              				"location": [35,35],
               				"orientation": "N"
           			}
       			},
       			"gds": [
-          			"dir::crom/gds/cust_rom.gds"
+          			"dir::rom1/gds/rom1.gds"
       			],
       			"lef": [
-          			"dir::crom/lef/cust_rom.lef"
+          			"dir::rom1/lef/rom1.lef"
       			],
       			"lib": {
-          			"*": ["dir::crom/lib/nom_tt_025C_1v80/cust_rom__nom_tt_025C_1v80.lib"]
+          			"*": ["dir::rom1/lib/nom_tt_025C_1v80/rom1__nom_tt_025C_1v80.lib"]
+			}
+  		},
+  		"rom2": {
+      			"instances": {
+          			"u_mem.u_rom2": {
+              				"location": [35,335],
+              				"orientation": "N"
+          			}
+      			},
+      			"gds": [
+          			"dir::rom2/gds/rom2.gds"
+      			],
+      			"lef": [
+          			"dir::rom2/lef/rom2.lef"
+      			],
+      			"lib": {
+          			"*": ["dir::rom2/lib/nom_tt_025C_1v80/rom2__nom_tt_025C_1v80.lib"]
+			}
+  		},
+  		"rom3": {
+      			"instances": {
+          			"u_mem.u_rom3": {
+              				"location": [35,635],
+              				"orientation": "N"
+          			}
+      			},
+      			"gds": [
+          			"dir::rom3/gds/rom3.gds"
+      			],
+      			"lef": [
+          			"dir::rom3/lef/rom3.lef"
+      			],
+      			"lib": {
+          			"*": ["dir::rom3/lib/nom_tt_025C_1v80/rom3__nom_tt_025C_1v80.lib"]
+			}
+  		},
+  		"rom4": {
+      			"instances": {
+          			"u_mem.u_rom4": {
+              				"location": [35, 935],
+              				"orientation": "N"
+          			}
+      			},
+      			"gds": [
+          			"dir::rom4/gds/rom4.gds"
+      			],
+      			"lef": [
+          			"dir::rom4/lef/rom4.lef"
+      			],
+      			"lib": {
+          			"*": ["dir::rom4/lib/nom_tt_025C_1v80/rom4__nom_tt_025C_1v80.lib"]
+			}
+  		},
+  		"rom5": {
+      			"instances": {
+          			"u_mem.u_rom5": {
+              				"location": [335,35],
+              				"orientation": "N"
+          			}
+      			},
+      			"gds": [
+          			"dir::rom5/gds/rom5.gds"
+      			],
+      			"lef": [
+          			"dir::rom5/lef/rom5.lef"
+      			],
+      			"lib": {
+          			"*": ["dir::rom5/lib/nom_tt_025C_1v80/rom5__nom_tt_025C_1v80.lib"]
+			}
+  		},
+  		"rom6": {
+      			"instances": {
+          			"u_mem.u_rom6": {
+              				"location": [335,335],
+              				"orientation": "N"
+          			}
+      			},
+      			"gds": [
+          			"dir::rom6/gds/rom6.gds"
+      			],
+      			"lef": [
+          			"dir::rom6/lef/rom6.lef"
+      			],
+      			"lib": {
+          			"*": ["dir::rom6/lib/nom_tt_025C_1v80/rom6__nom_tt_025C_1v80.lib"]
+			}
+  		},
+  		"rom7": {
+      			"instances": {
+          			"u_mem.u_rom7": {
+              				"location": [335,635],
+              				"orientation": "N"
+          			}
+      			},
+      			"gds": [
+          			"dir::rom7/gds/rom7.gds"
+      			],
+      			"lef": [
+          			"dir::rom7/lef/rom7.lef"
+      			],
+      			"lib": {
+          			"*": ["dir::rom7/lib/nom_tt_025C_1v80/rom7__nom_tt_025C_1v80.lib"]
+			}
+  		},
+  		"rom8": {
+      			"instances": {
+          			"u_mem.u_rom8": {
+              				"location": [335, 935],
+              				"orientation": "N"
+          			}
+      			},
+      			"gds": [
+          			"dir::rom8/gds/rom8.gds"
+      			],
+      			"lef": [
+          			"dir::rom8/lef/rom8.lef"
+      			],
+      			"lib": {
+          			"*": ["dir::rom8/lib/nom_tt_025C_1v80/rom8__nom_tt_025C_1v80.lib"]
 			}
   		}
 	},
 	"VDD_NETS": "vccd1",
 	"GND_NETS": "vssd1",
-	"PDN_MACRO_CONNECTIONS": ["u_mem vccd1 vssd1 vccd1 vssd1"],
+	"PDN_MACRO_CONNECTIONS": ["u_mem.u_rom.* vccd1 vssd1 vccd1 vssd1"],
 	"//MAGIC_CAPTURE_ERRORS": false,
 	"//RUN_KLAYOUT_DRC": false,
 	"//MAGIC_DRC_USE_GDS": false,
